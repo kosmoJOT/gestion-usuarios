@@ -24,8 +24,7 @@ export class VentanaModalComponent {
     });
   }
 
-  agregarUsuario(){
-    console.log('entra')
+  agregarUsuario(): void {
     const USER: Usuario = {
       nombre: this.form.value.nombre,
       apellido: this.form.value.apellido,

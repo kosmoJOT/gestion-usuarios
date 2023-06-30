@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { VentanaPrincipalComponent } from './components/ventana-principal/ventana-principal.component';
 import { TablaRegistrosComponent } from './components/tabla-registros/tabla-registros.component';
 import { VentanaModalComponent } from './components/ventana-modal/ventana-modal.component';
+//Servicios
+import { UsuarioService } from './services/usuario.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { VentanaModalComponent } from './components/ventana-modal/ventana-modal.
     //Modulos
     SharedModule
   ],
-  providers: [],
+  providers: [UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
