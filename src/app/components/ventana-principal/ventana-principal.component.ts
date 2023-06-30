@@ -14,8 +14,8 @@ export class VentanaPrincipalComponent {
 
   openDialog(){
     const dialogRef = this.dialog.open(VentanaModalComponent);
-    dialogRef.afterClosed().subscribe(result => {
+    /*dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-    });
+    });*/
   }
 }

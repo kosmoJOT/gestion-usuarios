@@ -1,8 +1,7 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -12,35 +11,65 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './tabla-registros.component.html',
   styleUrls: ['./tabla-registros.component.css']
 })
-export class TablaRegistrosComponent implements OnInit, AfterViewInit{
+export class TablaRegistrosComponent implements OnInit{
 
+  editarFila?: number;
   usuarios: Usuario[];
+  usuarioEditar: Usuario;
   dataSource!: MatTableDataSource<Usuario>;
-  displayedColumns: string[] = ['nombre', 'apellido', 'fechaNacimiento', 'email', 'cargo', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'fechaNacimiento', 'email', 'cargo', 'password', 'acciones'];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  form: FormGroup;
 
-  constructor(private _serviceUsuarios: UsuarioService){
+  constructor(private _serviceUsuarios: UsuarioService, private formBuilder: FormBuilder){
     this.usuarios = [];
+    this.form = this.formBuilder.group({
+      nombre: [''],
+      apellido: [''],
+      fechaNacimiento: [''],
+      email: [''],
+      cargo: [''],
+      password: ['']
+    });
+    this.usuarioEditar = {
+      nombre: '',
+      apellido: '',
+      fechaNacimiento: new Date(),
+      email: '',
+      cargo: '',
+      password: ''
+    }
   }
 
   ngOnInit(): void {
     this.getUsuarios();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   getUsuarios(): void {
-    /*this._serviceUsuarios.getUserList().subscribe( (data) => {
-      console.log(data)
-    });*/
     this.usuarios = this._serviceUsuarios.getUserList();
     this.dataSource = new MatTableDataSource(this.usuarios);
-    this.ngAfterViewInit();
+  }
+
+  editarUsuario(index: number){
+    const usuarioEditar = {};
+    if(this.editarFila===undefined){
+      this.editarFila = index;
+      this.usuarioEditar = this.usuarios[index];
+    }
+  }
+
+  cancelarUsuario(index: number){
+    this.editarFila = undefined;
+  }
+
+  guardarUsuario(index: number){
+    console.log(this.usuarioEditar)
+    this.editarFila = undefined;
+  }
+
+  eliminarUsuario(index: number){
+    console.log(this.usuarioEditar)
+    this.editarFila = undefined;
   }
 
 }

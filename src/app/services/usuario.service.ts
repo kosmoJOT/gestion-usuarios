@@ -17,6 +17,14 @@ export class UsuarioService {
       "email": "jaot037@gmail.com",
       "cargo": "Desarrollador",
       "password": "123"
+    },
+    {
+      "nombre":"Jose",
+      "apellido": "Olarte",
+      "fechaNacimiento": new Date('2001/09/13'),
+      "email": "jaot037@gmail.com",
+      "cargo": "Desarrollador",
+      "password": "123"
     }
   ];
 
