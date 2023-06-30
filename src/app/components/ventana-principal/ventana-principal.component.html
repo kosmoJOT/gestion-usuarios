@@ -1,10 +1,14 @@
 <div>
-  <div>
-    <h1>Gestión de usuario</h1>
-    <button mat-raised-button color="primary">Crear</button>
+  <div class="container">
+    <mat-toolbar>
+      <span>Gestión de usuario</span>
+    </mat-toolbar>
+  </div>
+  <div class="container">
+    <button mat-raised-button color="primary" (click)="openDialog()" style="left: 100%;">Crear</button>
   </div>
   <div>
     <!-- Recordar usar MatTable -->
-    <app-tabla-registros></app-tabla-registros>
+    <app-tabla-registros style="height: auto;"></app-tabla-registros>
   </div>
 </div>
