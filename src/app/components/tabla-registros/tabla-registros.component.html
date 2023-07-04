@@ -4,108 +4,55 @@
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef> Nombre </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <div *ngIf="editarFila===i; else pNombre">
-            <mat-form-field class="campoFormulario">
-              <input matInput type="text" [value]="usuarioEditar.nombre" [(ngModel)]="usuarioEditar.nombre">
-            </mat-form-field>
-          </div>
-          <ng-template #pNombre>
             <p>
               {{ element.nombre }}
             </p>
-          </ng-template>
         </td>
       </ng-container>
       <ng-container matColumnDef="apellido">
         <th mat-header-cell *matHeaderCellDef> Apellido </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <div *ngIf="editarFila===i; else pApellido">
-            <mat-form-field class="campoFormulario">
-              <input matInput type="text" [value]="usuarioEditar.apellido" [(ngModel)]="usuarioEditar.apellido">
-            </mat-form-field>
-          </div>
-          <ng-template #pApellido>
             <p>
-              {{ element.nombre }}
+              {{ element.apellido }}
             </p>
-          </ng-template>
         </td>
       </ng-container>
       <ng-container matColumnDef="fechaNacimiento">
         <th mat-header-cell *matHeaderCellDef> F. Nacimiento </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <div *ngIf="editarFila===i; else pFecha">
-            <mat-form-field class="campoFormulario">
-              <input matInput [matDatepicker]="picker" [value]="usuarioEditar.fechaNacimiento"
-                [(ngModel)]="usuarioEditar.fechaNacimiento">
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <ng-template #pFecha>
             <p>
               {{ element.fechaNacimiento | date:'yyyy-MM-dd' }}
             </p>
-          </ng-template>
         </td>
       </ng-container>
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <div *ngIf="editarFila===i; else pFecha">
-            <mat-form-field class="campoFormulario">
-              <input type="email" matInput [value]="usuarioEditar.email" [(ngModel)]="usuarioEditar.email">
-            </mat-form-field>
-          </div>
-          <ng-template #pFecha>
             <p>
               {{ element.email }}
             </p>
-          </ng-template>
         </td>
       </ng-container>
       <ng-container matColumnDef="cargo">
         <th mat-header-cell *matHeaderCellDef> Cargo </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <div *ngIf="editarFila===i; else pCargo">
-            <mat-form-field class="campoFormulario">
-              <mat-select [(ngModel)]="usuarioEditar.cargo">
-                <mat-option value="Desarrollador">Desarrollador</mat-option>
-                <mat-option value="Administrador">Administrador</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <ng-template #pCargo>
             <p>
               {{ element.cargo }}
             </p>
-          </ng-template>
         </td>
       </ng-container>
       <ng-container matColumnDef="password">
         <th mat-header-cell *matHeaderCellDef> Password </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <div *ngIf="editarFila===i; else pPass">
-            <mat-form-field class="campoFormulario">
-              <input matInput type="password" [value]="usuarioEditar.password" [(ngModel)]="usuarioEditar.password">
-            </mat-form-field>
-          </div>
-          <ng-template #pPass>
             <p>
               {{ element.password }}
             </p>
-          </ng-template>
         </td>
       </ng-container>
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element; let i = index">
-          <button mat-button color="primary" *ngIf="editarFila===i; else botonEditar"
-            (click)="guardarUsuario(i)">Guardar</button>
-          <button mat-button color="warn" *ngIf="editarFila===i" (click)="cancelarUsuario(i)">Cancelar</button>
-          <ng-template #valorPassword #botonEditar>
-            <button mat-button color="accent" (click)="editarUsuario(i)">Editar</button>
-          </ng-template>
+          <button mat-button color="accent" (click)="editarUsuario(i)">Editar</button>
           <button mat-button color="warn">Eliminar</button>
         </td>
       </ng-container>

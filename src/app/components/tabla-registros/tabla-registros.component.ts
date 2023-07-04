@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+
+import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -21,7 +24,7 @@ export class TablaRegistrosComponent implements OnInit{
 
   form: FormGroup;
 
-  constructor(private _serviceUsuarios: UsuarioService, private formBuilder: FormBuilder){
+  constructor(private _serviceUsuarios: UsuarioService, private formBuilder: FormBuilder, private dialog: MatDialog){
     this.usuarios = [];
     this.form = this.formBuilder.group({
       nombre: [''],
@@ -51,20 +54,11 @@ export class TablaRegistrosComponent implements OnInit{
   }
 
   editarUsuario(index: number){
-    const usuarioEditar = {};
-    if(this.editarFila===undefined){
-      this.editarFila = index;
-      this.usuarioEditar = this.usuarios[index];
-    }
-  }
-
-  cancelarUsuario(index: number){
-    this.editarFila = undefined;
-  }
-
-  guardarUsuario(index: number){
-    console.log(this.usuarioEditar)
-    this.editarFila = undefined;
+    this.editarFila = index;
+    this.usuarioEditar = this.usuarios[index];
+    const dialogRef = this.dialog.open(VentanaModalComponent, {
+      data: this.usuarioEditar
+    });
   }
 
   eliminarUsuario(index: number){

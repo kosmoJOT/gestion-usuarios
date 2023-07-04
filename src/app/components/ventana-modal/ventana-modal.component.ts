@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
 
@@ -12,8 +14,10 @@ import { Usuario } from 'src/app/interfaces/Usuario';
 export class VentanaModalComponent {
 
   form: FormGroup;
+  banderaAgregar: boolean;
+  banderaEditar: boolean;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) private data: {form: Usuario}) {
     this.form = this.formBuilder.group({
       nombre: [''],
       apellido: [''],
@@ -22,9 +26,18 @@ export class VentanaModalComponent {
       cargo: [''],
       password: ['']
     });
+    if(data){
+      this.banderaAgregar = false;
+      this.banderaEditar = true;
+      this.form.setValue(data);
+    }
+    else{
+      this.banderaAgregar = true;
+      this.banderaEditar = false;
+    }
   }
 
-  agregarUsuario(): void {
+  prepararUsuario(): Usuario {
     const USER: Usuario = {
       nombre: this.form.value.nombre,
       apellido: this.form.value.apellido,
@@ -33,6 +46,26 @@ export class VentanaModalComponent {
       cargo: this.form.value.cargo,
       password: this.form.value.password
     }
-    console.log(USER);
+    return USER;
+  }
+
+  subirInformacion(): void {
+    const USER = this.prepararUsuario();
+    if(this.banderaAgregar===true && this.banderaEditar===false){
+      this.agregarUsuario();
+    }
+    if(this.banderaAgregar===false && this.banderaEditar===true){
+      this.editarUsuario();
+    }
+  }
+
+  agregarUsuario(): void {
+    const USER = this.prepararUsuario();
+    console.log('Agregar', USER);
+  }
+
+  editarUsuario(): void {
+    const USER = this.prepararUsuario();
+    console.log('Editar', USER);
   }
 }
