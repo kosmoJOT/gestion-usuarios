@@ -1,10 +1,14 @@
 interface Usuario {
-  nombre: string,
-  apellido: string,
-  fechaNacimiento: Date,
-  email: string,
-  cargo: string,
-  password: string
+  NOMBRE: string,
+  APELLIDO: string,
+  FECHA_NACIMIENTO: Date,
+  EMAIL: string,
+  CARGO: string,
+  PASSWORD: string
 };
 
-export { Usuario };
+interface PeticionListaUsuarios {
+  data: Usuario[],
+  message: string
+}
+export { Usuario, PeticionListaUsuarios };

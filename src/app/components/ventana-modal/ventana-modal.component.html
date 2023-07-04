@@ -7,13 +7,13 @@
             <td>
               <mat-form-field class="campoFormulario">
                 <mat-label>Nombre</mat-label>
-                <input matInput type="text" formControlName="nombre">
+                <input matInput type="text" formControlName="NOMBRE">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="campoFormulario">
                 <mat-label>Apellido</mat-label>
-                <input matInput type="text" formControlName="apellido">
+                <input matInput type="text" formControlName="APELLIDO">
               </mat-form-field>
             </td>
           </tr>
@@ -21,7 +21,7 @@
             <td>
               <mat-form-field class="campoFormulario">
                 <mat-label>Fecha Nacimiento</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+                <input matInput [matDatepicker]="picker" formControlName="FECHA_NACIMIENTO">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
@@ -29,7 +29,7 @@
             <td>
               <mat-form-field class="campoFormulario">
                 <mat-label>Email</mat-label>
-                <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="email">
+                <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="EMAIL">
               </mat-form-field>
             </td>
           </tr>
@@ -37,7 +37,7 @@
             <td>
               <mat-form-field class="campoFormulario">
                 <mat-label>Cargo</mat-label>
-                <mat-select formControlName="cargo">
+                <mat-select formControlName="CARGO">
                   <mat-option value="Desarrollador">Desarrollador</mat-option>
                   <mat-option value="Administrador">Administrador</mat-option>
                 </mat-select>
@@ -46,7 +46,7 @@
             <td>
               <mat-form-field class="campoFormulario">
                 <mat-label>Contraseña</mat-label>
-                <input matInput type="password" formControlName="password">
+                <input matInput type="password" formControlName="PASSWORD">
               </mat-form-field>
             </td>
           </tr>

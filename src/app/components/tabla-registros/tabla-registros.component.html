@@ -1,51 +1,51 @@
 <div>
   <div class="container">
     <table mat-table [dataSource]="dataSource" class="table">
-      <ng-container matColumnDef="nombre">
+      <ng-container matColumnDef="NOMBRE">
         <th mat-header-cell *matHeaderCellDef> Nombre </th>
         <td mat-cell *matCellDef="let element; let i = index">
             <p>
-              {{ element.nombre }}
+              {{ element.NOMBRE }}
             </p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="apellido">
+      <ng-container matColumnDef="APELLIDO">
         <th mat-header-cell *matHeaderCellDef> Apellido </th>
         <td mat-cell *matCellDef="let element; let i = index">
             <p>
-              {{ element.apellido }}
+              {{ element.APELLIDO }}
             </p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="fechaNacimiento">
+      <ng-container matColumnDef="FECHA_NACIMIENTO">
         <th mat-header-cell *matHeaderCellDef> F. Nacimiento </th>
         <td mat-cell *matCellDef="let element; let i = index">
             <p>
-              {{ element.fechaNacimiento | date:'yyyy-MM-dd' }}
+              {{ element.FECHA_NACIMIENTO | date:'yyyy-MM-dd' }}
             </p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="email">
+      <ng-container matColumnDef="EMAIL">
         <th mat-header-cell *matHeaderCellDef> Email </th>
         <td mat-cell *matCellDef="let element; let i = index">
             <p>
-              {{ element.email }}
+              {{ element.EMAIL }}
             </p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="cargo">
+      <ng-container matColumnDef="CARGO">
         <th mat-header-cell *matHeaderCellDef> Cargo </th>
         <td mat-cell *matCellDef="let element; let i = index">
             <p>
-              {{ element.cargo }}
+              {{ element.CARGO }}
             </p>
         </td>
       </ng-container>
-      <ng-container matColumnDef="password">
+      <ng-container matColumnDef="PASSWORD">
         <th mat-header-cell *matHeaderCellDef> Password </th>
         <td mat-cell *matCellDef="let element; let i = index">
             <p>
-              {{ element.password }}
+              {{ element.PASSWORD }}
             </p>
         </td>
       </ng-container>

@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component';
 
-import { Usuario } from 'src/app/interfaces/Usuario';
+import { Usuario, PeticionListaUsuarios } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -20,27 +20,27 @@ export class TablaRegistrosComponent implements OnInit{
   usuarios: Usuario[];
   usuarioEditar: Usuario;
   dataSource!: MatTableDataSource<Usuario>;
-  displayedColumns: string[] = ['nombre', 'apellido', 'fechaNacimiento', 'email', 'cargo', 'password', 'acciones'];
+  displayedColumns: string[] = ['NOMBRE', 'APELLIDO', 'FECHA_NACIMIENTO', 'EMAIL', 'CARGO', 'PASSWORD', 'acciones'];
 
   form: FormGroup;
 
   constructor(private _serviceUsuarios: UsuarioService, private formBuilder: FormBuilder, private dialog: MatDialog){
     this.usuarios = [];
     this.form = this.formBuilder.group({
-      nombre: [''],
-      apellido: [''],
-      fechaNacimiento: [''],
-      email: [''],
-      cargo: [''],
-      password: ['']
+      NOMBRE: [''],
+      APELLIDO: [''],
+      FECHA_NACIMIENTO: [''],
+      EMAIL: [''],
+      CARGO: [''],
+      PASSWORD: ['']
     });
     this.usuarioEditar = {
-      nombre: '',
-      apellido: '',
-      fechaNacimiento: new Date(),
-      email: '',
-      cargo: '',
-      password: ''
+      NOMBRE: '',
+      APELLIDO: '',
+      FECHA_NACIMIENTO: new Date(),
+      EMAIL: '',
+      CARGO: '',
+      PASSWORD: ''
     }
   }
 
@@ -49,8 +49,10 @@ export class TablaRegistrosComponent implements OnInit{
   }
 
   getUsuarios(): void {
-    this.usuarios = this._serviceUsuarios.getUserList();
-    this.dataSource = new MatTableDataSource(this.usuarios);
+    this._serviceUsuarios.getUserList().subscribe( (data) => {
+      this.usuarios = data.data;
+      this.dataSource = new MatTableDataSource(this.usuarios);
+    });
   }
 
   editarUsuario(index: number){

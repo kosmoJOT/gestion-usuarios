@@ -19,12 +19,12 @@ export class VentanaModalComponent {
 
   constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) private data: {form: Usuario}) {
     this.form = this.formBuilder.group({
-      nombre: [''],
-      apellido: [''],
-      fechaNacimiento: [''],
-      email: [''],
-      cargo: [''],
-      password: ['']
+      NOMBRE: [''],
+      APELLIDO: [''],
+      FECHA_NACIMIENTO: [''],
+      EMAIL: [''],
+      CARGO: [''],
+      PASSWORD: ['']
     });
     if(data){
       this.banderaAgregar = false;
@@ -39,12 +39,12 @@ export class VentanaModalComponent {
 
   prepararUsuario(): Usuario {
     const USER: Usuario = {
-      nombre: this.form.value.nombre,
-      apellido: this.form.value.apellido,
-      fechaNacimiento: this.form.value.fechaNacimiento,
-      email: this.form.value.email,
-      cargo: this.form.value.cargo,
-      password: this.form.value.password
+      NOMBRE: this.form.value.NOMBRE,
+      APELLIDO: this.form.value.APELLIDO,
+      FECHA_NACIMIENTO: this.form.value.FECHA_NACIMIENTO,
+      EMAIL: this.form.value.EMAIL,
+      CARGO: this.form.value.CARGO,
+      PASSWORD: this.form.value.PASSWORD
     }
     return USER;
   }

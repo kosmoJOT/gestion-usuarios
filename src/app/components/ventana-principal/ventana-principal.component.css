@@ -1,0 +1,8 @@
+.cajaBorde {
+  /*border: 2px black solid;*/
+  border-radius: 2px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  background-color: white;
+}
