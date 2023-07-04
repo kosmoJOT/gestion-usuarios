@@ -1,10 +1,11 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-ventana-modal',
@@ -17,7 +18,7 @@ export class VentanaModalComponent {
   banderaAgregar: boolean;
   banderaEditar: boolean;
 
-  constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) private data: {form: Usuario}) {
+  constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) private data: {form: Usuario}, private _serviceUsuarios: UsuarioService) {
     this.form = this.formBuilder.group({
       NOMBRE: [''],
       APELLIDO: [''],
@@ -61,11 +62,15 @@ export class VentanaModalComponent {
 
   agregarUsuario(): void {
     const USER = this.prepararUsuario();
-    console.log('Agregar', USER);
+    this._serviceUsuarios.newUser(USER).subscribe( (data) => {
+      console.log(data)
+    });
   }
 
   editarUsuario(): void {
     const USER = this.prepararUsuario();
-    console.log('Editar', USER);
+    this._serviceUsuarios.updateUser(USER).subscribe( (data) => {
+      console.log(data)
+    });
   }
 }

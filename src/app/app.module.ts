@@ -11,6 +11,7 @@ import { TablaRegistrosComponent } from './components/tabla-registros/tabla-regi
 import { VentanaModalComponent } from './components/ventana-modal/ventana-modal.component';
 //Servicios
 import { UsuarioService } from './services/usuario.service';
+import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UsuarioService } from './services/usuario.service';
     //Componentes
     VentanaPrincipalComponent,
     TablaRegistrosComponent,
-    VentanaModalComponent
+    VentanaModalComponent,
+    ModalEliminarComponent
   ],
   imports: [
     BrowserModule,

@@ -6,8 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component';
 
-import { Usuario, PeticionListaUsuarios } from 'src/app/interfaces/Usuario';
+import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
 
 @Component({
   selector: 'app-tabla-registros',
@@ -64,8 +65,10 @@ export class TablaRegistrosComponent implements OnInit{
   }
 
   eliminarUsuario(index: number){
-    console.log(this.usuarioEditar)
-    this.editarFila = undefined;
+    this.editarFila = index;
+    const dialogRef = this.dialog.open(ModalEliminarComponent, {
+      data: { email:  this.usuarios[index].EMAIL }
+    });
   }
 
 }

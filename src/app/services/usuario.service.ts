@@ -8,44 +8,28 @@ import { Usuario, PeticionListaUsuarios } from '../interfaces/Usuario';
 })
 export class UsuarioService {
 
-  baseUrl = 'http://localhost:3700';
-  listado: Usuario[] = [
-    {
-      "NOMBRE":"Alejandro",
-      "APELLIDO": "Torres",
-      "FECHA_NACIMIENTO": new Date('2001/09/13'),
-      "EMAIL": "jaot037@gmail.com",
-      "CARGO": "Desarrollador",
-      "PASSWORD": "123"
-    },
-    {
-      "NOMBRE":"Jose",
-      "APELLIDO": "Olarte",
-      "FECHA_NACIMIENTO": new Date('2001/09/13'),
-      "EMAIL": "jaot037@gmail.com",
-      "CARGO": "Desarrollador",
-      "PASSWORD": "123"
-    }
-  ];
+  //baseUrl = 'http://localhost:3700';
+  baseUrl = 'http://kosmetikon.myqnapcloud.com:8769';
 
   constructor(private http: HttpClient) { }
 
   getUserList(): Observable<PeticionListaUsuarios> {
-    return this.http.get<PeticionListaUsuarios>('http://kosmetikon.myqnapcloud.com:8769/getUserList');
-  }
-  /*getUserList(): any {
-    return this.listado.slice();
-  }*/
-
-  newUser(data: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.baseUrl}/newUser`, { data: data });
+    return this.http.get<PeticionListaUsuarios>(`${this.baseUrl}/getUserList`);
   }
 
-  updateUser(data: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.baseUrl}/updateUser`, { data: data });
+  newUser(data: Usuario): Observable<any> {
+    console.log(data);
+    return this.http.post<any>(`${this.baseUrl}/newUser`, data, { headers: {'Content-Type': 'application/json'} });
   }
 
-  /*deleteUser(data: Usuario): Observable<Usuario> {
-    return this.http.delete<Usuario>(`${this.baseUrl}/deleteUser`, { data: data });
-  }*/
+  updateUser(data: Usuario): Observable<any> {
+    console.log(data)
+    return this.http.patch<any>(`${this.baseUrl}/updateUser`, data, { headers: {'Content-Type': 'application/json'} });
+  }
+
+  deleteUser(data: {EMAIL: string, PASSWORD: string}): Observable<any> {
+    console.log('dasdas',data)
+    return this.http.delete<any>(`${this.baseUrl}/deleteUser`, {
+      headers: {'Content-Type': 'application/json'}, body: data});
+  }
 }
