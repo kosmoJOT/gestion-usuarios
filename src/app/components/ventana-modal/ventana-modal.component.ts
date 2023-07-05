@@ -21,12 +21,12 @@ export class VentanaModalComponent {
 
   constructor(public dialogRef: MatDialogRef<VentanaModalComponent>, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) private data: { form: Usuario }, private _serviceUsuarios: UsuarioService) {
     this.form = this.formBuilder.group({
-      NOMBRE: [''],
-      APELLIDO: [''],
-      FECHA_NACIMIENTO: [''],
-      EMAIL: [''],
-      CARGO: [''],
-      PASSWORD: ['']
+      NOMBRE: ['',  Validators.required],
+      APELLIDO: ['',  Validators.required],
+      FECHA_NACIMIENTO: ['',  Validators.required],
+      EMAIL: ['',  Validators.required, Validators.email],
+      CARGO: ['',  Validators.required],
+      PASSWORD: ['',  Validators.required]
     });
     if (data) {
       this.banderaAgregar = false;
@@ -34,7 +34,6 @@ export class VentanaModalComponent {
       this.form.setValue(data);
     }
     else {
-      console.log('entraaa')
       this.banderaAgregar = true;
       this.banderaEditar = false;
     }

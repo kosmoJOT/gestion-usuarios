@@ -16,8 +16,8 @@ export class ModalEliminarComponent {
 
   constructor(public dialogRef: MatDialogRef<ModalEliminarComponent>, private _serviceUsuarios: UsuarioService, private formBuilder: FormBuilder, private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) private data: { email: string }){
     this.form = this.formBuilder.group({
-      EMAIL: [''],
-      PASSWORD: ['']
+      EMAIL: ['', Validators.required, Validators.email],
+      PASSWORD: ['', Validators.required]
     });
     this.form.patchValue( { EMAIL: data.email });
   }
