@@ -1,8 +1,29 @@
-.cajaBorde {
+.titulo {
   /*border: 2px black solid;*/
   border-radius: 2px;
   border-width: 2px;
   border-color: black;
   border-style: solid;
   background-color: white;
+  margin: 30px;
+  padding: 30px;
+}
+
+.titulo p {
+  font-family: Impact;
+  font-size: xx-large;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 3px 5px 5px gray;
+}
+
+.contenedor {
+  margin: 30px;
+  padding: 30px;
+}
+
+button {
+  border: solid 1px black;
+  float: right;
+  text-transform: uppercase;
 }

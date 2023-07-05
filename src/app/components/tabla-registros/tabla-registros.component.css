@@ -1,8 +1,16 @@
-.table {
-  max-width: 100%;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.campoFormulario {
-  margin: 0 auto;
-  height: auto;
+th, td {
+  border: solid 1px black;
+  padding: 5px;
+}
+
+th {
+  font-family: Impact;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 3px 5px 5px gray;
 }

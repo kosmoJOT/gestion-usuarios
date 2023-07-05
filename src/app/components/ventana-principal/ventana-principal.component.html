@@ -1,17 +1,7 @@
-<div>
-  <div class="cajaBorde">
-    <span>Gestión de usuario</span>
-  </div>
-  <div class="container">
-    <mat-toolbar>
-      <span>Gestión de usuario</span>
-    </mat-toolbar>
-  </div>
-  <div class="container">
-    <button mat-raised-button color="primary" (click)="openDialog()" style="left: 100%;">Crear</button>
-  </div>
-  <div>
-    <!-- Recordar usar MatTable -->
-    <app-tabla-registros style="height: auto;"></app-tabla-registros>
-  </div>
+<div class="titulo">
+  <p>Gestión de usuario</p>
 </div>
+<div class="contenedor">
+  <button mat-raised-button color="primary" (click)="openDialog()">Crear</button>
+</div>
+<app-tabla-registros></app-tabla-registros>
