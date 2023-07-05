@@ -24,7 +24,7 @@ export class VentanaModalComponent {
       NOMBRE: ['',  Validators.required],
       APELLIDO: ['',  Validators.required],
       FECHA_NACIMIENTO: ['',  Validators.required],
-      EMAIL: ['',  Validators.required, Validators.email],
+      EMAIL: ['',  Validators.required],
       CARGO: ['',  Validators.required],
       PASSWORD: ['',  Validators.required]
     });
