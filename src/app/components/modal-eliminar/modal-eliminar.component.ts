@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -14,7 +14,7 @@ export class ModalEliminarComponent {
 
   form: FormGroup;
 
-  constructor(private _serviceUsuarios: UsuarioService, private formBuilder: FormBuilder, private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) private data: { email: string }){
+  constructor(public dialogRef: MatDialogRef<ModalEliminarComponent>, private _serviceUsuarios: UsuarioService, private formBuilder: FormBuilder, private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) private data: { email: string }){
     this.form = this.formBuilder.group({
       EMAIL: [''],
       PASSWORD: ['']
@@ -30,5 +30,9 @@ export class ModalEliminarComponent {
     this._serviceUsuarios.deleteUser(DATA).subscribe( (data) => {
       console.log(data);
     });
+  }
+
+  cerrarDialog(){
+    this.dialogRef.close();
   }
 }
