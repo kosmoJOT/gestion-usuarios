@@ -16,6 +16,8 @@ import { UsuarioService } from './services/usuario.service';
 import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
 import { EliminarUsuarioComponent } from './components/operaciones/eliminar-usuario/eliminar-usuario.component';
 import { EditarUsuarioComponent } from './components/operaciones/editar-usuario/editar-usuario.component';
+import { RegistrarUsuarioComponent } from './components/login/registrar-usuario/registrar-usuario.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { EditarUsuarioComponent } from './components/operaciones/editar-usuario/
     LoginComponent,
     CrearUsuarioComponent,
     EliminarUsuarioComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    RegistrarUsuarioComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

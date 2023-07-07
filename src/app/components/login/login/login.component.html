@@ -10,7 +10,7 @@
       <input matInput type="password" formControlName="PASSWORD">
     </mat-form-field>
     <mat-checkbox class="campoFormulario" color="primary" formControlName="RECORDAR">¿Recordar usuario?</mat-checkbox>
-    <button mat-raised-button type="submit" color="primary">Iniciar Sesión</button>
-    <button mat-raised-button type="submit" color="primary">Crear Cuenta</button>
+    <button mat-raised-button type="submit" color="primary" (click)="iniciarSesion()">Iniciar Sesión</button>
+    <button mat-raised-button type="submit" color="primary" routerLink="/registrar-usuario">Crear Cuenta</button>
   </form>
 </section>

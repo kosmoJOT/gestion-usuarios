@@ -6,14 +6,19 @@ import { LoginComponent } from './components/login/login/login.component';
 import { CrearUsuarioComponent } from './components/operaciones/crear-usuario/crear-usuario.component';
 import { EliminarUsuarioComponent } from './components/operaciones/eliminar-usuario/eliminar-usuario.component';
 import { EditarUsuarioComponent } from './components/operaciones/editar-usuario/editar-usuario.component';
+import { RegistrarUsuarioComponent } from './components/login/registrar-usuario/registrar-usuario.component';
+import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
   { path: 'crear-usuario', component: CrearUsuarioComponent },
   { path: 'eliminar-usuario', component: EliminarUsuarioComponent },
   { path: 'editar-usuario', component: EditarUsuarioComponent },
   { path: 'gestion-usuarios', component: VentanaPrincipalComponent },
-  { path: '**', component: LoginComponent }
+  { path: 'error', component: ErrorComponent },
+  { path: '', component: LoginComponent },
+  { path: '**', component: LoginComponent },
 ];
 
 @NgModule({

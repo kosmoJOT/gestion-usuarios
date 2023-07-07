@@ -7,8 +7,13 @@ interface Usuario {
   PASSWORD: string
 };
 
+interface EliminarUsuario {
+  EMAIL: string,
+  PASSWORD: string
+};
+
 interface PeticionListaUsuarios {
   data: Usuario[],
   message: string
 }
-export { Usuario, PeticionListaUsuarios };
+export { Usuario, EliminarUsuario, PeticionListaUsuarios };

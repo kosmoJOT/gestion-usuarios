@@ -1,8 +1,9 @@
-.form-crear-usuario {
-  width: 475px;
+.aviso-error {
+  width: 400px;
   height: auto;
   background-color: white;
   margin: auto;
+  margin-top: 150px;
   border-radius: 2px;
   border-width: 2px;
   border-color: black;
@@ -12,18 +13,10 @@
 }
 
 .titulo {
+  color: red;
   font-family: Impact;
   font-size: xx-large;
   text-align: center;
   text-transform: uppercase;
   text-shadow: 3px 5px 5px gray;
-  margin-bottom: 50px;
-}
-
-.campoFormulario {
-  width: 100%;
-}
-
-button {
-  width: 100%;
 }

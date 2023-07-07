@@ -3,6 +3,8 @@
   height: auto;
   background-color: white;
   margin: auto;
+  /*Margin top presenta el problema del espacio en blanco*/
+  margin-top: 100px;
   border-radius: 2px;
   border-width: 2px;
   border-color: black;
