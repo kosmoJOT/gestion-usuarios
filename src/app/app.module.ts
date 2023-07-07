@@ -12,6 +12,7 @@ import { VentanaModalComponent } from './components/ventana-modal/ventana-modal.
 //Servicios
 import { UsuarioService } from './services/usuario.service';
 import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
+import { LoginComponent } from './components/login/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ModalEliminarComponent } from './components/modal-eliminar/modal-elimin
     VentanaPrincipalComponent,
     TablaRegistrosComponent,
     VentanaModalComponent,
-    ModalEliminarComponent
+    ModalEliminarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

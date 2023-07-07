@@ -1,0 +1,30 @@
+.form-login {
+  width: 400px;
+  height: auto;
+  background-color: white;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 2px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  box-shadow: 7px 13px 37px black;
+  padding: 20px 30px;
+}
+
+.titulo {
+  font-family: Impact;
+  font-size: xx-large;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 3px 5px 5px gray;
+  margin-bottom: 50px;
+}
+
+.campoFormulario {
+  width: 100%;
+}
+
+button {
+  width: 100%;
+}
