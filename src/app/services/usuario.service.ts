@@ -8,7 +8,7 @@ import { Usuario, PeticionListaUsuarios } from '../interfaces/Usuario';
 })
 export class UsuarioService {
 
-  baseUrl = 'http://kosmetikon.myqnapcloud.com:8769';
+  baseUrl = 'http://kosmetikon.myqnapcloud.com:44444';
 
   constructor(private http: HttpClient) { }
 

@@ -1,5 +1,5 @@
-.form-login {
-  width: 400px;
+.form-eliminar-usuario {
+  width: 475px;
   height: auto;
   background-color: white;
   margin: auto;
@@ -27,5 +27,4 @@
 
 button {
   width: 100%;
-  margin: 3px;
 }

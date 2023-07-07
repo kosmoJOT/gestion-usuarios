@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component';
+import { CrearUsuarioComponent } from '../operaciones/crear-usuario/crear-usuario.component';
 
 @Component({
   selector: 'app-ventana-principal',
@@ -10,9 +11,9 @@ import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component'
 })
 export class VentanaPrincipalComponent {
 
-  constructor(private dialog: MatDialog){}
+  constructor(public dialog: MatDialog){}
 
-  openDialog(){
-    const dialogRef = this.dialog.open(VentanaModalComponent);
+  abrirModalCrear(){
+    this.dialog.open(CrearUsuarioComponent);
   }
 }

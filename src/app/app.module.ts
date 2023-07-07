@@ -9,10 +9,13 @@ import { SharedModule } from './shared/shared.module';
 import { VentanaPrincipalComponent } from './components/ventana-principal/ventana-principal.component';
 import { TablaRegistrosComponent } from './components/tabla-registros/tabla-registros.component';
 import { VentanaModalComponent } from './components/ventana-modal/ventana-modal.component';
+import { LoginComponent } from './components/login/login/login.component';
+import { CrearUsuarioComponent } from './components/operaciones/crear-usuario/crear-usuario.component';
 //Servicios
 import { UsuarioService } from './services/usuario.service';
 import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
-import { LoginComponent } from './components/login/login/login.component';
+import { EliminarUsuarioComponent } from './components/operaciones/eliminar-usuario/eliminar-usuario.component';
+import { EditarUsuarioComponent } from './components/operaciones/editar-usuario/editar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { LoginComponent } from './components/login/login/login.component';
     TablaRegistrosComponent,
     VentanaModalComponent,
     ModalEliminarComponent,
-    LoginComponent
+    LoginComponent,
+    CrearUsuarioComponent,
+    EliminarUsuarioComponent,
+    EditarUsuarioComponent
   ],
   imports: [
     BrowserModule,
