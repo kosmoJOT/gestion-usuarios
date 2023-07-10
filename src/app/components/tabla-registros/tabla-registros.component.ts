@@ -51,6 +51,7 @@ export class TablaRegistrosComponent implements OnInit{
 
   getUsuarios(): void {
     this._serviceUsuarios.getUserList().subscribe( (data) => {
+      console.log('sdasdasdasda', data)
       this.usuarios = data.data;
       this.dataSource = new MatTableDataSource(this.usuarios);
     });

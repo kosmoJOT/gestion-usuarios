@@ -3,4 +3,9 @@ interface LoginUsuario {
   PASSWORD: string
 };
 
-export { LoginUsuario };
+interface RespuestLogin {
+  message: string,
+  token: string
+}
+
+export { LoginUsuario, RespuestLogin };

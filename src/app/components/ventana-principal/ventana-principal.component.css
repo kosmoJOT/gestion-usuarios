@@ -18,12 +18,12 @@
 }
 
 .contenedor {
-  margin: 30px;
-  padding: 30px;
+  margin: 30px 30px 80px 30px;
 }
 
 button {
   border: solid 1px black;
   float: right;
   text-transform: uppercase;
+  margin: 0px 2px 2px 2px;
 }

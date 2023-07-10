@@ -11,13 +11,17 @@ import { TablaRegistrosComponent } from './components/tabla-registros/tabla-regi
 import { VentanaModalComponent } from './components/ventana-modal/ventana-modal.component';
 import { LoginComponent } from './components/login/login/login.component';
 import { CrearUsuarioComponent } from './components/operaciones/crear-usuario/crear-usuario.component';
-//Servicios
-import { UsuarioService } from './services/usuario.service';
 import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
 import { EliminarUsuarioComponent } from './components/operaciones/eliminar-usuario/eliminar-usuario.component';
 import { EditarUsuarioComponent } from './components/operaciones/editar-usuario/editar-usuario.component';
 import { RegistrarUsuarioComponent } from './components/login/registrar-usuario/registrar-usuario.component';
 import { ErrorComponent } from './components/error/error.component';
+//Servicios
+import { UsuarioService } from './services/usuario.service';
+//Providers
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,12 @@ import { ErrorComponent } from './components/error/error.component';
     //Modulos
     SharedModule
   ],
-  providers: [UsuarioService],
+  providers: [
+    UsuarioService,
+    JwtHelperService,
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

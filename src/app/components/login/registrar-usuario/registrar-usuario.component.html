@@ -5,38 +5,38 @@
       <tr>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <input matInput type="text" formControlName="NOMBRE">
+            <mat-label for="nombreRegistrar">Nombre</mat-label>
+            <input matInput type="text" id="nombreRegistrar" formControlName="NOMBRE">
           </mat-form-field>
         </td>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
-            <mat-label>Apellido</mat-label>
-            <input matInput type="text" formControlName="APELLIDO">
+            <mat-label for="apellidoRegistrar">Apellido</mat-label>
+            <input matInput type="text" id="apellidoRegistrar" formControlName="APELLIDO">
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
-            <mat-label>Fecha Nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="FECHA_NACIMIENTO">
+            <mat-label for="fechaRegistrar">Fecha Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" id="fechaRegistrar" formControlName="FECHA_NACIMIENTO">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </td>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="pat@example.com" formControlName="EMAIL">
+            <mat-label for="correoRegistrar">Email</mat-label>
+            <input type="email" matInput id="correoRegistrar" placeholder="pat@example.com" formControlName="EMAIL">
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
-            <mat-label>Cargo</mat-label>
-            <mat-select formControlName="CARGO">
+            <mat-label for="cargoRegistrar">Cargo</mat-label>
+            <mat-select id="cargoRegistrar" formControlName="CARGO">
               <mat-option value="Desarrollador">Desarrollador</mat-option>
               <mat-option value="Administrador">Administrador</mat-option>
             </mat-select>
@@ -44,8 +44,8 @@
         </td>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="PASSWORD">
+            <mat-label for="passwordRegistrar">Password</mat-label>
+            <input matInput type="password" id="passwordRegistrar" formControlName="PASSWORD">
           </mat-form-field>
         </td>
       </tr>
@@ -56,7 +56,7 @@
       </tr>
       <tr>
         <td colspan="2">
-          <button mat-raised-button color="warn">Cancelar</button>
+          <button mat-raised-button color="warn" routerLink="/login">Cancelar</button>
         </td>
       </tr>
     </table>

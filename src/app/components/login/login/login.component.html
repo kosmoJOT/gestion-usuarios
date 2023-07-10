@@ -2,12 +2,12 @@
   <p class="titulo">Iniciar sesión</p>
   <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
     <mat-form-field class="campoFormulario" appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput type="text" formControlName="EMAIL">
+      <mat-label for="emailLogin">Email</mat-label>
+      <input matInput type="text" id="emailLogin" formControlName="EMAIL">
     </mat-form-field>
     <mat-form-field class="campoFormulario" appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="PASSWORD">
+      <mat-label for="passwordLogin">Password</mat-label>
+      <input matInput type="password" id="passwordLogin" formControlName="PASSWORD">
     </mat-form-field>
     <mat-checkbox class="campoFormulario" color="primary" formControlName="RECORDAR">¿Recordar usuario?</mat-checkbox>
     <button mat-raised-button type="submit" color="primary" (click)="iniciarSesion()">Iniciar Sesión</button>
