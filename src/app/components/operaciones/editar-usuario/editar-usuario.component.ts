@@ -65,7 +65,9 @@ export class EditarUsuarioComponent implements OnInit{
       PASSWORD: this.form.value.PASSWORD
     };
     this._serviceUsuarios.updateUser(USER).subscribe((data) => {
-      console.log(data)
+      if(data){
+        window.location.reload();
+      }
     });
   }
 }

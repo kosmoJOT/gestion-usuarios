@@ -34,7 +34,9 @@ export class EliminarUsuarioComponent implements OnInit{
       PASSWORD: this.form.value.PASSWORD
     };
     this._serviceUsuarios.deleteUser(USER).subscribe( (data) => {
-      console.log(data);
+      if(data){
+        window.location.reload();
+      }
     });
   }
 }

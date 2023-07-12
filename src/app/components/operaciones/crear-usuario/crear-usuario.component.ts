@@ -6,6 +6,7 @@ import { Observable, of, pipe } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -21,7 +22,8 @@ export class CrearUsuarioComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private _serviceUsuarios: UsuarioService,
-    private _serviceCargos: CargoService
+    private _serviceCargos: CargoService,
+    private router:Router
     ){
     this.form = this.formBuilder.group({
       NOMBRE: ['',  Validators.required],
@@ -63,7 +65,10 @@ export class CrearUsuarioComponent implements OnInit{
       PASSWORD: this.form.value.PASSWORD
     };
     this._serviceUsuarios.newUser(USER).subscribe((data) => {
-      console.log(data)
+      console.log(data);
+      if(data){
+        window.location.reload();
+      }
     });
   }
 }
