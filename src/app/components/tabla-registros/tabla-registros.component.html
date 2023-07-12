@@ -42,7 +42,8 @@
       <th mat-header-cell *matHeaderCellDef> Cargo </th>
       <td mat-cell *matCellDef="let element; let i = index">
         <p>
-          {{ element | json }}
+          <!-- {{ element | json }} -->
+          {{ obtenerCargo(element.ID_CARGO) }}
         </p>
       </td>
     </ng-container>

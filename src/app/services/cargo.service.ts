@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RUTA } from '../interfaces/Ruta';
-import { ListaCargos } from '../interfaces/Cargo';
+import { Cargo, ListaCargos } from '../interfaces/Cargo';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,14 @@ export class CargoService {
     return Number(id);
   }
 
-  obtenerNombreCargo(id: number, ){
-    return Number(id);
+  obtenerNombreCargo(id: number, listadoCargos: Cargo[]): string {
+    var str = '';
+    listadoCargos.forEach( (cargo: Cargo) => {
+      if(id===cargo.ID_CARGO){
+        str = cargo.CARGO;
+      }
+    });
+    const cargo = (id).toString()+'-'+str;
+    return cargo;
   }
 }
