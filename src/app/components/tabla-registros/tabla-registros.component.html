@@ -38,11 +38,11 @@
         </p>
       </td>
     </ng-container>
-    <ng-container matColumnDef="CARGO">
+    <ng-container matColumnDef="ID_CARGO">
       <th mat-header-cell *matHeaderCellDef> Cargo </th>
       <td mat-cell *matCellDef="let element; let i = index">
         <p>
-          {{ element.CARGO }}
+          {{ element | json }}
         </p>
       </td>
     </ng-container>

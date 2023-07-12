@@ -35,13 +35,25 @@
       <tr>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
+            <mat-label>Number</mat-label>
+            <input type="text" placeholder="Cargo" matInput formControlName="ID_CARGO"
+              [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let cargo of filteredOptions | async" [value]="cargo.ID_CARGO+'-'+cargo.CARGO">
+                {{cargo.CARGO}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </td>
+        <!-- <td>
+          <mat-form-field class="campoFormulario" appearance="outline">
             <mat-label>Cargo</mat-label>
             <mat-select formControlName="CARGO">
               <mat-option value="Desarrollador">Desarrollador</mat-option>
               <mat-option value="Administrador">Administrador</mat-option>
             </mat-select>
           </mat-form-field>
-        </td>
+        </td> -->
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
             <mat-label>Password</mat-label>
@@ -51,7 +63,8 @@
       </tr>
       <tr>
         <td colspan="2">
-          <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid" (click)="crearUsuario()">Crear</button>
+          <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid"
+            (click)="crearUsuario()">Crear</button>
         </td>
       </tr>
       <tr>

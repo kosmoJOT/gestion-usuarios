@@ -9,6 +9,7 @@ import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component'
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
+import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
 
 @Component({
   selector: 'app-tabla-registros',
@@ -21,7 +22,7 @@ export class TablaRegistrosComponent implements OnInit{
   usuarios: Usuario[];
   usuarioEditar: Usuario;
   dataSource!: MatTableDataSource<Usuario>;
-  displayedColumns: string[] = ['NOMBRE', 'APELLIDO', 'FECHA_NACIMIENTO', 'EMAIL', 'CARGO', 'PASSWORD', 'acciones'];
+  displayedColumns: string[] = ['NOMBRE', 'APELLIDO', 'FECHA_NACIMIENTO', 'EMAIL', 'ID_CARGO', 'PASSWORD', 'acciones'];
 
   form: FormGroup;
 
@@ -32,7 +33,7 @@ export class TablaRegistrosComponent implements OnInit{
       APELLIDO: [''],
       FECHA_NACIMIENTO: [''],
       EMAIL: [''],
-      CARGO: [''],
+      ID_CARGO: [''],
       PASSWORD: ['']
     });
     this.usuarioEditar = {
@@ -40,7 +41,7 @@ export class TablaRegistrosComponent implements OnInit{
       APELLIDO: '',
       FECHA_NACIMIENTO: new Date(),
       EMAIL: '',
-      CARGO: '',
+      ID_CARGO: 0,
       PASSWORD: ''
     }
   }
@@ -51,8 +52,8 @@ export class TablaRegistrosComponent implements OnInit{
 
   getUsuarios(): void {
     this._serviceUsuarios.getUserList().subscribe( (data) => {
-      console.log('sdasdasdasda', data)
       this.usuarios = data.data;
+      console.log(this.usuarios);
       this.dataSource = new MatTableDataSource(this.usuarios);
     });
   }
@@ -60,9 +61,12 @@ export class TablaRegistrosComponent implements OnInit{
   editarUsuario(index: number){
     this.editarFila = index;
     this.usuarioEditar = this.usuarios[index];
-    const dialogRef = this.dialog.open(VentanaModalComponent, {
+    const dialogRef = this.dialog.open(EditarUsuarioComponent, {
       data: this.usuarioEditar
     });
+    /*const dialogRef = this.dialog.open(VentanaModalComponent, {
+      data: this.usuarioEditar
+    });*/
   }
 
   eliminarUsuario(index: number){

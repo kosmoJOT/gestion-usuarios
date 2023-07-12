@@ -18,7 +18,7 @@ export class RegistrarUsuarioComponent {
       APELLIDO: ['',  Validators.required],
       FECHA_NACIMIENTO: ['',  Validators.required],
       EMAIL: ['',  [Validators.required, Validators.email]],
-      CARGO: ['',  Validators.required],
+      ID_CARGO: ['',  Validators.required],
       PASSWORD: ['',  Validators.required]
     });
   }
@@ -29,7 +29,7 @@ export class RegistrarUsuarioComponent {
       APELLIDO: this.form.value.APELLIDO,
       FECHA_NACIMIENTO: this.form.value.FECHA_NACIMIENTO,
       EMAIL: this.form.value.EMAIL,
-      CARGO: this.form.value.CARGO,
+      ID_CARGO: this.form.value.CARGO,
       PASSWORD: this.form.value.PASSWORD
     };
     this._serviceUsuarios.newUser(USER).subscribe( (res) => {

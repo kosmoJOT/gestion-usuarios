@@ -10,8 +10,6 @@ import { LoginService } from './login.service';
 })
 export class UsuarioService {
 
-  baseUrl = 'http://kosmetikon.myqnapcloud.com:44444';
-
   constructor(private http: HttpClient, private _loginService: LoginService) { }
 
   getUserList(): Observable<PeticionListaUsuarios> {

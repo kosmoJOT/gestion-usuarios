@@ -25,7 +25,7 @@ export class VentanaModalComponent {
       APELLIDO: ['',  Validators.required],
       FECHA_NACIMIENTO: ['',  Validators.required],
       EMAIL: ['',  Validators.required],
-      CARGO: ['',  Validators.required],
+      ID_CARGO: ['',  Validators.required],
       PASSWORD: ['',  Validators.required]
     });
     if (data) {
@@ -45,7 +45,7 @@ export class VentanaModalComponent {
       APELLIDO: this.form.value.APELLIDO,
       FECHA_NACIMIENTO: this.form.value.FECHA_NACIMIENTO,
       EMAIL: this.form.value.EMAIL,
-      CARGO: this.form.value.CARGO,
+      ID_CARGO: this.form.value.CARGO,
       PASSWORD: this.form.value.PASSWORD
     }
     return USER;

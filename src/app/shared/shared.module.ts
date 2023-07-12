@@ -16,6 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatTableModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   exports: [
     //Modulos
@@ -55,7 +57,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSortModule,
     MatTableModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ]
 })
 export class SharedModule { }

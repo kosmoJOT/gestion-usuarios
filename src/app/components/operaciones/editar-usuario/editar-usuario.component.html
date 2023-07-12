@@ -35,13 +35,25 @@
       <tr>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
+            <mat-label>Number</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="CARGO"
+              [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </td>
+        <!-- <td>
+          <mat-form-field class="campoFormulario" appearance="outline">
             <mat-label>Cargo</mat-label>
             <mat-select formControlName="CARGO">
               <mat-option value="Desarrollador">Desarrollador</mat-option>
               <mat-option value="Administrador">Administrador</mat-option>
             </mat-select>
           </mat-form-field>
-        </td>
+        </td> -->
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
             <mat-label>Password</mat-label>
