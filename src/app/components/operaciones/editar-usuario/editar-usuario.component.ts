@@ -32,6 +32,8 @@ export class EditarUsuarioComponent {
       CARGO: this.form.value.CARGO,
       PASSWORD: this.form.value.PASSWORD
     };
-    console.log(USER);
+    this._serviceUsuarios.updateUser(USER).subscribe((data) => {
+      console.log(data)
+    });
   }
 }

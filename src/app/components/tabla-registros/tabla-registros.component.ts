@@ -72,4 +72,9 @@ export class TablaRegistrosComponent implements OnInit{
     });
   }
 
+  filtrar(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }

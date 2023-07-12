@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from 'src/app/interfaces/Usuario';
+import { EliminarUsuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -21,14 +21,12 @@ export class EliminarUsuarioComponent {
   }
 
   eliminarUsuario(){
-    const USER: Usuario = {
-      NOMBRE: this.form.value.NOMBRE,
-      APELLIDO: this.form.value.APELLIDO,
-      FECHA_NACIMIENTO: this.form.value.FECHA_NACIMIENTO,
+    const USER: EliminarUsuario = {
       EMAIL: this.form.value.EMAIL,
-      CARGO: this.form.value.CARGO,
       PASSWORD: this.form.value.PASSWORD
     };
-    console.log(USER);
+    this._serviceUsuarios.deleteUser(USER).subscribe( (data) => {
+      console.log(data);
+    });
   }
 }
