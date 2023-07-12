@@ -35,11 +35,10 @@
       <tr>
         <td>
           <mat-form-field class="campoFormulario" appearance="outline">
-            <mat-label>Number</mat-label>
-            <input type="text" placeholder="Cargo" matInput formControlName="ID_CARGO"
-              [matAutocomplete]="auto">
+            <mat-label>Cargo</mat-label>
+            <input type="text" matInput formControlName="ID_CARGO" [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let cargo of filteredOptions | async" [value]="cargo.ID_CARGO+'-'+cargo.CARGO">
+              <mat-option *ngFor="let cargo of filteredOptions | async" [value]="cargo.CARGO">
                 {{cargo.CARGO}}
               </mat-option>
             </mat-autocomplete>

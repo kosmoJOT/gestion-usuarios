@@ -81,7 +81,7 @@ export class TablaRegistrosComponent implements OnInit {
     this.editarFila = index;
     this.usuarioEditar = this.usuarios[index];
     const dialogRef = this.dialog.open(EditarUsuarioComponent, {
-      data: this.usuarioEditar
+      data: { usuario: this.usuarioEditar, listadoCargos: this.cargos }
     });
     /*const dialogRef = this.dialog.open(VentanaModalComponent, {
       data: this.usuarioEditar

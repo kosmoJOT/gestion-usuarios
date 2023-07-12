@@ -14,9 +14,16 @@ export class CargoService {
     return this.http.get<ListaCargos>(`${RUTA}/getPositionList`);
   }
 
-  obtenerIdCargo(str: string): number{
-    const id = str.split('-')[0];
-    return Number(id);
+  obtenerIdCargo(str: string, listadoCargos: Cargo[]): number{
+    //const id = str.split('-')[0];
+    var id = 0;
+    listadoCargos.forEach( (cargo: Cargo) => {
+      if(str===cargo.CARGO){
+        id = cargo.ID_CARGO;
+      }
+    });
+    return id;
+    //return Number(id);
   }
 
   obtenerNombreCargo(id: number, listadoCargos: Cargo[]): string {
@@ -26,7 +33,7 @@ export class CargoService {
         str = cargo.CARGO;
       }
     });
-    const cargo = (id).toString()+'-'+str;
-    return cargo;
+    //const cargo = (id).toString()+'-'+str;
+    return str;
   }
 }

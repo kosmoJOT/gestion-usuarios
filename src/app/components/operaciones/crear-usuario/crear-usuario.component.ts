@@ -59,7 +59,7 @@ export class CrearUsuarioComponent implements OnInit{
       APELLIDO: this.form.value.APELLIDO,
       FECHA_NACIMIENTO: this.form.value.FECHA_NACIMIENTO,
       EMAIL: this.form.value.EMAIL,
-      ID_CARGO: this._serviceCargos.obtenerIdCargo(this.form.value.ID_CARGO),
+      ID_CARGO: this._serviceCargos.obtenerIdCargo(this.form.value.ID_CARGO, this.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
     this._serviceUsuarios.newUser(USER).subscribe((data) => {

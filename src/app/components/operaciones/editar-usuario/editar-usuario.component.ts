@@ -5,6 +5,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CargoService } from 'src/app/services/cargo.service';
+import { Cargo } from 'src/app/interfaces/Cargo';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -14,10 +16,14 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 export class EditarUsuarioComponent implements OnInit{
 
   form: FormGroup;
-  options: string[] = ['Desarrollador', 'Two', 'Three', 'Four', 'Five', 'Six'];
-  filteredOptions!: Observable<string[]>;
+  filteredOptions!: Observable<Cargo[]>;
 
-  constructor(private formBuilder: FormBuilder, private _serviceUsuarios: UsuarioService, @Inject(MAT_DIALOG_DATA) public data: { form: Usuario }){
+  constructor(
+    private formBuilder: FormBuilder,
+    private _serviceUsuarios: UsuarioService,
+    private _serviceCargo: CargoService,
+    @Inject(MAT_DIALOG_DATA) public data: { usuario: Usuario, listadoCargos: Cargo[] }
+  ){
     this.form = this.formBuilder.group({
       NOMBRE: ['',  Validators.required],
       APELLIDO: ['',  Validators.required],
@@ -26,30 +32,36 @@ export class EditarUsuarioComponent implements OnInit{
       ID_CARGO: ['',  Validators.required],
       PASSWORD: ['',  Validators.required]
     });
-    console.log(this.data)
-    this.form.setValue(this.data);
   }
 
   ngOnInit() {
-    this.filteredOptions = this.form.controls['CARGO'].valueChanges.pipe(
-      startWith(''),
+    this.form.setValue({
+      NOMBRE: this.data.usuario.NOMBRE,
+      APELLIDO: this.data.usuario.APELLIDO,
+      FECHA_NACIMIENTO: this.data.usuario.FECHA_NACIMIENTO,
+      EMAIL: this.data.usuario.EMAIL,
+      ID_CARGO: this._serviceCargo.obtenerNombreCargo(this.data.usuario.ID_CARGO, this.data.listadoCargos),
+      PASSWORD: ''
+    });
+    this.filteredOptions = this.form.controls['ID_CARGO'].valueChanges.pipe(
+      startWith(this.form.value.ID_CARGO),
       map(value => this._filter(value || '')),
     );
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): Cargo[] {
     const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.data.listadoCargos.filter(option => option.CARGO.toLowerCase().includes(filterValue));
   }
 
   editarUsuario(){
+    console.log('dasdasda', this.form.value.ID_CARGO)
     const USER: Usuario = {
       NOMBRE: this.form.value.NOMBRE,
       APELLIDO: this.form.value.APELLIDO,
       FECHA_NACIMIENTO: this.form.value.FECHA_NACIMIENTO,
       EMAIL: this.form.value.EMAIL,
-      ID_CARGO: this.form.value.CARGO,
+      ID_CARGO: this._serviceCargo.obtenerIdCargo(this.form.value.ID_CARGO, this.data.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
     this._serviceUsuarios.updateUser(USER).subscribe((data) => {
