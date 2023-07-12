@@ -12,6 +12,7 @@ import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.compone
 import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
 import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo } from 'src/app/interfaces/Cargo';
+import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
 
 @Component({
   selector: 'app-tabla-registros',
@@ -90,7 +91,7 @@ export class TablaRegistrosComponent implements OnInit {
 
   eliminarUsuario(index: number) {
     this.editarFila = index;
-    const dialogRef = this.dialog.open(ModalEliminarComponent, {
+    const dialogRef = this.dialog.open(EliminarUsuarioComponent, {
       data: { email: this.usuarios[index].EMAIL }
     });
   }
