@@ -4,11 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
-import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
 import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
 import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo } from 'src/app/interfaces/Cargo';

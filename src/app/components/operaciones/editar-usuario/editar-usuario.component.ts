@@ -7,6 +7,9 @@ import { map, startWith } from 'rxjs/operators';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo } from 'src/app/interfaces/Cargo';
+import { AvisoComponent } from '../../aviso/aviso.component';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -22,6 +25,9 @@ export class EditarUsuarioComponent implements OnInit{
     private formBuilder: FormBuilder,
     private _serviceUsuarios: UsuarioService,
     private _serviceCargo: CargoService,
+    private router:Router,
+    private _snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<EditarUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { usuario: Usuario, listadoCargos: Cargo[] }
   ){
     this.form = this.formBuilder.group({
@@ -66,7 +72,18 @@ export class EditarUsuarioComponent implements OnInit{
     };
     this._serviceUsuarios.updateUser(USER).subscribe((data) => {
       if(data){
+        this.dialogRef.close();
         window.location.reload();
+        this.openSnackBar();
+      }
+    });
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(AvisoComponent, {
+      duration: 1000,
+      data: {
+        message: "Usuario Editado"
       }
     });
   }

@@ -7,6 +7,9 @@ import { filter, map, startWith } from 'rxjs/operators';
 import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
 import { Router } from '@angular/router';
+import { AvisoComponent } from '../../aviso/aviso.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -23,7 +26,9 @@ export class CrearUsuarioComponent implements OnInit{
     private formBuilder: FormBuilder,
     private _serviceUsuarios: UsuarioService,
     private _serviceCargos: CargoService,
-    private router:Router
+    private router:Router,
+    private _snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<CrearUsuarioComponent>
     ){
     this.form = this.formBuilder.group({
       NOMBRE: ['',  Validators.required],
@@ -67,7 +72,18 @@ export class CrearUsuarioComponent implements OnInit{
     this._serviceUsuarios.newUser(USER).subscribe((data) => {
       console.log(data);
       if(data){
-        window.location.reload();
+        this.dialogRef.close();
+        this.router.navigate(['/','gestion-usuarios']);
+        this.openSnackBar();
+      }
+    });
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(AvisoComponent, {
+      duration: 1000,
+      data: {
+        message: "Usuario Creado"
       }
     });
   }

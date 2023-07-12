@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { MatDialog } from '@angular/material/dialog';
-import { VentanaModalComponent } from '../ventana-modal/ventana-modal.component';
 import { CrearUsuarioComponent } from '../operaciones/crear-usuario/crear-usuario.component';
 
 @Component({

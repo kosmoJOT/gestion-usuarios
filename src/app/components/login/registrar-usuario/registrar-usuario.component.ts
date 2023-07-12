@@ -7,6 +7,8 @@ import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
 import { CargoService } from 'src/app/services/cargo.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AvisoComponent } from '../../aviso/aviso.component';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -22,7 +24,9 @@ export class RegistrarUsuarioComponent implements OnInit{
   constructor(private formBuilder: FormBuilder,
     private _serviceUsuarios: UsuarioService,
     private _serviceCargos: CargoService,
-    private router: Router){
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ){
     this.form = this.formBuilder.group({
       NOMBRE: ['',  Validators.required],
       APELLIDO: ['',  Validators.required],
@@ -64,7 +68,17 @@ export class RegistrarUsuarioComponent implements OnInit{
     };
     this._serviceUsuarios.newUser(USER).subscribe( (res) => {
       if(res){
-        this.router.navigate(['login']);
+        this.router.navigate(['/','login']);
+        this.openSnackBar();
+      }
+    });
+  }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(AvisoComponent, {
+      duration: 1000,
+      data: {
+        message: "Usuario Registrado"
       }
     });
   }
