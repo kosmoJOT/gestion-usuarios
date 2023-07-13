@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { LoginUsuario, RespuestLogin } from 'src/app/interfaces/LoginUsuario';
-import { Usuario, PeticionListaUsuarios } from 'src/app/interfaces/Usuario';
+import { Usuario } from 'src/app/interfaces/Usuario';
+
 import { LoginService } from 'src/app/services/login.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -11,21 +13,23 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent{
 
   form: FormGroup;
   listaUsuarios: Usuario[];
 
-  constructor(private formBuilder: FormBuilder, private _loginService: LoginService, private _usuarioService: UsuarioService, private router:Router){
+  constructor(
+    private formBuilder: FormBuilder,
+    private _loginService: LoginService,
+    private _usuarioService: UsuarioService,
+    private router:Router
+  ){
     this.form = this.formBuilder.group({
       EMAIL: ['',  [Validators.required, Validators.email]],
       PASSWORD: ['',  Validators.required],
       RECORDAR: false
     });
     this.listaUsuarios = [];
-  }
-
-  ngOnInit(): void {
   }
 
   iniciarSesion(){

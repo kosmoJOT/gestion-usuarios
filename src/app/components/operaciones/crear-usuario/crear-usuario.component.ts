@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from 'src/app/interfaces/Usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { CargoService } from 'src/app/services/cargo.service';
-import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
-import { Router } from '@angular/router';
-import { AvisoComponent } from '../../aviso/aviso.component';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
+
+import { Usuario } from 'src/app/interfaces/Usuario';
+import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
+
+import { CargoService } from 'src/app/services/cargo.service';
+
+import { AvisoComponent } from '../../aviso/aviso.component';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -24,7 +28,6 @@ export class CrearUsuarioComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private _serviceUsuarios: UsuarioService,
     private _serviceCargos: CargoService,
     private router:Router,
     private _snackBar: MatSnackBar,

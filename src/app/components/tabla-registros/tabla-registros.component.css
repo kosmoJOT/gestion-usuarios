@@ -1,17 +1,36 @@
-table {
+.contenedor {
   width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.tabla {
+  width: 100%;
+  border: 2px solid black;
   border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  table-layout: fixed;
 }
 
-th, td {
-  border: solid 1px black;
-  padding: 5px;
-  text-align: center;
-}
-
-th {
+.tabla caption {
   font-family: Impact;
+  font-size: xx-large;
   text-align: center;
   text-transform: uppercase;
   text-shadow: 3px 5px 5px gray;
+  margin: 10px 0px;
 }
+
+.tabla th {
+  font-family: Impact;
+  text-transform: uppercase;
+  text-shadow: 3px 5px 5px gray;
+  background-color: blanchedalmond;
+}
+
+.tabla td, .tabla th {
+  padding: 2px;
+  text-align: center;
+}
+

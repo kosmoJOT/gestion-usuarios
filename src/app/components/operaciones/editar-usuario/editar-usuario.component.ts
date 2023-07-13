@@ -1,15 +1,20 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from 'src/app/interfaces/Usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CargoService } from 'src/app/services/cargo.service';
-import { Cargo } from 'src/app/interfaces/Cargo';
-import { AvisoComponent } from '../../aviso/aviso.component';
-import { Router } from '@angular/router';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+import { Usuario } from 'src/app/interfaces/Usuario';
+import { Cargo } from 'src/app/interfaces/Cargo';
+
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { CargoService } from 'src/app/services/cargo.service';
+
+import { AvisoComponent } from '../../aviso/aviso.component';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -69,13 +74,6 @@ export class EditarUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargo.obtenerIdCargo(this.form.value.ID_CARGO, this.data.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    /*this._serviceUsuarios.updateUser(USER).subscribe((data) => {
-      if(data){
-        this.dialogRef.close();
-        window.location.reload();
-        this.openSnackBar();
-      }
-    });*/
     this.dialogRef.close(USER);
   }
 

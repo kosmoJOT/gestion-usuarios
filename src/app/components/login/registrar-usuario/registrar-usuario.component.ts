@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/app/interfaces/Usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
-import { CargoService } from 'src/app/services/cargo.service';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Usuario } from 'src/app/interfaces/Usuario';
+import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
+
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { CargoService } from 'src/app/services/cargo.service';
+
 import { AvisoComponent } from '../../aviso/aviso.component';
 
 @Component({

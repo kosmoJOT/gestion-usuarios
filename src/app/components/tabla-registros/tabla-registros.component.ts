@@ -1,28 +1,29 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
-import { Usuario } from 'src/app/interfaces/Usuario';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
-import { CargoService } from 'src/app/services/cargo.service';
-import { Cargo } from 'src/app/interfaces/Cargo';
-import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
 import { TooltipPosition } from '@angular/material/tooltip';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+
+import { Usuario } from 'src/app/interfaces/Usuario';
+import { Cargo } from 'src/app/interfaces/Cargo';
+
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { CargoService } from 'src/app/services/cargo.service';
+
+import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
+import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
+
 
 @Component({
   selector: 'app-tabla-registros',
   templateUrl: './tabla-registros.component.html',
   styleUrls: ['./tabla-registros.component.css']
 })
-export class TablaRegistrosComponent implements OnInit, OnChanges/*, AfterViewInit*/ {
+export class TablaRegistrosComponent implements OnInit, OnChanges {
 
   @Input() usuarios: any;
   @Output() operacionEnTabla = new EventEmitter<boolean>();
-  //@ViewChild(MatPaginator) paginator!: MatPaginator;
-  //@ViewChild(MatSort) sort!: MatSort;
 
   editarFila?: number;
   cargos: Cargo[];
@@ -40,7 +41,6 @@ export class TablaRegistrosComponent implements OnInit, OnChanges/*, AfterViewIn
     private dialog: MatDialog)
   {
     this.cargos = [];
-    //this.usuarios = [];
     this.form = this.formBuilder.group({
       NOMBRE: [''],
       APELLIDO: [''],
@@ -67,16 +67,9 @@ export class TablaRegistrosComponent implements OnInit, OnChanges/*, AfterViewIn
     this.getUsuarios();
   }
 
-  //ngAfterViewInit() {
-    //this.dataSource.paginator = this.paginator;
-    //this.dataSource.sort = this.sort;
-  //}
-
   getUsuarios(): void {
     this.dataSource = new MatTableDataSource(this.usuarios);
     console.log(this.usuarios);
-    //this.dataSource.paginator = this.paginator;
-    //this.dataSource.sort = this.sort;
   }
 
   getCargos(): void {

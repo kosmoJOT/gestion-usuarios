@@ -23,7 +23,7 @@ export class VentanaPrincipalComponent implements OnInit {
   ngOnInit(): void {
     this.obsSubject.subscribe((data: any) => {
       this.listaUsuarios = data;
-    })
+    });
     this.refrescarTabla(true);
   }
 
