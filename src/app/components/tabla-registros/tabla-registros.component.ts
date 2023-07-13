@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { Cargo } from 'src/app/interfaces/Cargo';
@@ -13,6 +14,7 @@ import { CargoService } from 'src/app/services/cargo.service';
 
 import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
 import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
+import { AvisoComponent } from '../aviso/aviso.component';
 
 
 @Component({
@@ -38,8 +40,9 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     private _serviceUsuarios: UsuarioService,
     private _serviceCargos: CargoService,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog)
-  {
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
+  ){
     this.cargos = [];
     this.form = this.formBuilder.group({
       NOMBRE: [''],
@@ -69,7 +72,6 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
 
   getUsuarios(): void {
     this.dataSource = new MatTableDataSource(this.usuarios);
-    console.log(this.usuarios);
   }
 
   getCargos(): void {
@@ -91,6 +93,7 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe( (res) => {
       this._serviceUsuarios.updateUser(res).subscribe((data) => {
         this.operacionEnTabla.emit(true);
+        this.openSnackBar(data.message);
       });
     });
   }
@@ -103,6 +106,7 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe( (res) => {
       this._serviceUsuarios.deleteUser(res).subscribe((data) => {
         this.operacionEnTabla.emit(true);
+        this.openSnackBar(data.message);
       });
     });
   }
@@ -112,4 +116,12 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  openSnackBar(message: string) {
+    let snackBarRef = this._snackBar.openFromComponent(AvisoComponent, {
+      data: {
+        message: message
+      },
+      duration: 1000
+    });
+  }
 }

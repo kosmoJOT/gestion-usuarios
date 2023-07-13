@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 //Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
@@ -42,7 +43,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatIconModule
   ],
   exports: [
     //Modulos
@@ -63,7 +65,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCardModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatIconModule
   ]
 })
 export class SharedModule { }

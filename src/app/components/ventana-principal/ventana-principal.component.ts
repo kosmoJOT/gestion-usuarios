@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CrearUsuarioComponent } from '../operaciones/crear-usuario/crear-usuario.component';
+
 import { Subject } from 'rxjs'
-import { UsuarioService } from 'src/app/services/usuario.service';
+
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
 import { PeticionListaUsuarios, Usuario } from 'src/app/interfaces/Usuario';
+
+import { UsuarioService } from 'src/app/services/usuario.service';
+
+import { CrearUsuarioComponent } from '../operaciones/crear-usuario/crear-usuario.component';
+import { AvisoComponent } from '../aviso/aviso.component';
 
 @Component({
   selector: 'app-ventana-principal',
@@ -15,9 +23,11 @@ export class VentanaPrincipalComponent implements OnInit {
   obsSubject = new Subject<any>();
   listaUsuarios: Usuario[] = [];
 
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialog,
     private _serviceUsuario: UsuarioService,
     private _serviceUsuarios: UsuarioService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -30,8 +40,9 @@ export class VentanaPrincipalComponent implements OnInit {
   abrirModalCrear() {
     const dialog = this.dialog.open(CrearUsuarioComponent);
     dialog.afterClosed().subscribe((res) => {
-      this._serviceUsuarios.newUser(res).subscribe((data) => {
+      this._serviceUsuarios.newUser(res).subscribe((data: any) => {
         this.refrescarTabla(true);
+        this.openSnackBar(data.message);
       });
     });
   }
@@ -42,5 +53,14 @@ export class VentanaPrincipalComponent implements OnInit {
         this.obsSubject.next(data.data);
       });
     }
+  }
+
+  openSnackBar(message: string) {
+    let snackBarRef = this._snackBar.openFromComponent(AvisoComponent, {
+      data: {
+        message: message
+      },
+      duration: 1000
+    });
   }
 }
