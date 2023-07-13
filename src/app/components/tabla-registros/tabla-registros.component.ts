@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-
-
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
@@ -12,20 +9,26 @@ import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo } from 'src/app/interfaces/Cargo';
 import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
 import { TooltipPosition } from '@angular/material/tooltip';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-tabla-registros',
   templateUrl: './tabla-registros.component.html',
   styleUrls: ['./tabla-registros.component.css']
 })
-export class TablaRegistrosComponent implements OnInit {
+export class TablaRegistrosComponent implements OnInit, OnChanges/*, AfterViewInit*/ {
+
+  @Input() usuarios: any;
+  @Output() operacionEnTabla = new EventEmitter<boolean>();
+  //@ViewChild(MatPaginator) paginator!: MatPaginator;
+  //@ViewChild(MatSort) sort!: MatSort;
 
   editarFila?: number;
   cargos: Cargo[];
-  usuarios: Usuario[];
   usuarioEditar: Usuario;
   dataSource!: MatTableDataSource<Usuario>;
-  displayedColumns: string[] = ['NOMBRE', 'APELLIDO', 'FECHA_NACIMIENTO', 'EMAIL', 'ID_CARGO', 'PASSWORD', 'acciones'];
+  displayedColumns: string[] = ['NOMBRE', 'APELLIDO', 'FECHA_NACIMIENTO', 'EMAIL', 'ID_CARGO', 'PASSWORD', 'ACCIONES'];
   toolTipPosition: TooltipPosition = 'above';
 
   form: FormGroup;
@@ -37,7 +40,7 @@ export class TablaRegistrosComponent implements OnInit {
     private dialog: MatDialog)
   {
     this.cargos = [];
-    this.usuarios = [];
+    //this.usuarios = [];
     this.form = this.formBuilder.group({
       NOMBRE: [''],
       APELLIDO: [''],
@@ -57,15 +60,23 @@ export class TablaRegistrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUsuarios();
     this.getCargos();
   }
 
+  ngOnChanges(): void {
+    this.getUsuarios();
+  }
+
+  //ngAfterViewInit() {
+    //this.dataSource.paginator = this.paginator;
+    //this.dataSource.sort = this.sort;
+  //}
+
   getUsuarios(): void {
-    this._serviceUsuarios.getUserList().subscribe((data) => {
-      this.usuarios = data.data;
-      this.dataSource = new MatTableDataSource(this.usuarios);
-    });
+    this.dataSource = new MatTableDataSource(this.usuarios);
+    console.log(this.usuarios);
+    //this.dataSource.paginator = this.paginator;
+    //this.dataSource.sort = this.sort;
   }
 
   getCargos(): void {
@@ -84,15 +95,22 @@ export class TablaRegistrosComponent implements OnInit {
     const dialogRef = this.dialog.open(EditarUsuarioComponent, {
       data: { usuario: this.usuarioEditar, listadoCargos: this.cargos }
     });
-    /*const dialogRef = this.dialog.open(VentanaModalComponent, {
-      data: this.usuarioEditar
-    });*/
+    dialogRef.afterClosed().subscribe( (res) => {
+      this._serviceUsuarios.updateUser(res).subscribe((data) => {
+        this.operacionEnTabla.emit(true);
+      });
+    });
   }
 
   eliminarUsuario(index: number) {
     this.editarFila = index;
     const dialogRef = this.dialog.open(EliminarUsuarioComponent, {
       data: { email: this.usuarios[index].EMAIL }
+    });
+    dialogRef.afterClosed().subscribe( (res) => {
+      this._serviceUsuarios.deleteUser(res).subscribe((data) => {
+        this.operacionEnTabla.emit(true);
+      });
     });
   }
 

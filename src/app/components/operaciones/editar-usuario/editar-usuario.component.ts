@@ -61,7 +61,6 @@ export class EditarUsuarioComponent implements OnInit{
   }
 
   editarUsuario(){
-    console.log('dasdasda', this.form.value.ID_CARGO)
     const USER: Usuario = {
       NOMBRE: this.form.value.NOMBRE,
       APELLIDO: this.form.value.APELLIDO,
@@ -70,13 +69,14 @@ export class EditarUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargo.obtenerIdCargo(this.form.value.ID_CARGO, this.data.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    this._serviceUsuarios.updateUser(USER).subscribe((data) => {
+    /*this._serviceUsuarios.updateUser(USER).subscribe((data) => {
       if(data){
         this.dialogRef.close();
         window.location.reload();
         this.openSnackBar();
       }
-    });
+    });*/
+    this.dialogRef.close(USER);
   }
 
   openSnackBar() {

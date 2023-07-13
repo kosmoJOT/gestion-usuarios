@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { Observable, of, pipe } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
 import { Router } from '@angular/router';
@@ -69,12 +69,6 @@ export class CrearUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargos.obtenerIdCargo(this.form.value.ID_CARGO, this.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    /*this._serviceUsuarios.newUser(USER).subscribe((data) => {
-      console.log(data);
-      if(data){
-        this.dialogRef.close(USER);
-      }
-    });*/
     this.dialogRef.close(USER);
   }
 

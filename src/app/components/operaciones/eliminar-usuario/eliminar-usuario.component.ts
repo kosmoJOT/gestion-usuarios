@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EliminarUsuario } from 'src/app/interfaces/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -17,7 +17,8 @@ export class EliminarUsuarioComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private _serviceUsuarios: UsuarioService,
-    @Inject(MAT_DIALOG_DATA) public data: { email: string }
+    @Inject(MAT_DIALOG_DATA) public data: { email: string },
+    public dialogRef: MatDialogRef<EliminarUsuarioComponent>
   ){
     this.form = this.formBuilder.group({
       EMAIL: [this.data.email,  [Validators.required, Validators.email]],
@@ -33,10 +34,6 @@ export class EliminarUsuarioComponent implements OnInit{
       EMAIL: this.form.value.EMAIL,
       PASSWORD: this.form.value.PASSWORD
     };
-    this._serviceUsuarios.deleteUser(USER).subscribe( (data) => {
-      if(data){
-        window.location.reload();
-      }
-    });
+    this.dialogRef.close(USER);
   }
 }
