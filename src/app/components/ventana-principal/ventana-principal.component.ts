@@ -12,6 +12,9 @@ export class VentanaPrincipalComponent {
   constructor(public dialog: MatDialog){}
 
   abrirModalCrear(){
-    this.dialog.open(CrearUsuarioComponent);
+    const dialog = this.dialog.open(CrearUsuarioComponent);
+    dialog.afterClosed().subscribe( (res) => {
+      console.log(res);
+    });
   }
 }

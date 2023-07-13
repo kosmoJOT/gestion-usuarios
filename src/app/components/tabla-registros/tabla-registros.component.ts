@@ -11,6 +11,7 @@ import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usu
 import { CargoService } from 'src/app/services/cargo.service';
 import { Cargo } from 'src/app/interfaces/Cargo';
 import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-tabla-registros',
@@ -25,6 +26,7 @@ export class TablaRegistrosComponent implements OnInit {
   usuarioEditar: Usuario;
   dataSource!: MatTableDataSource<Usuario>;
   displayedColumns: string[] = ['NOMBRE', 'APELLIDO', 'FECHA_NACIMIENTO', 'EMAIL', 'ID_CARGO', 'PASSWORD', 'acciones'];
+  toolTipPosition: TooltipPosition = 'above';
 
   form: FormGroup;
 

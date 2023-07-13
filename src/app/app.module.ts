@@ -8,10 +8,8 @@ import { SharedModule } from './shared/shared.module';
 //Componentes
 import { VentanaPrincipalComponent } from './components/ventana-principal/ventana-principal.component';
 import { TablaRegistrosComponent } from './components/tabla-registros/tabla-registros.component';
-//import { VentanaModalComponent } from './components/ventana-modal/ventana-modal.component';
 import { LoginComponent } from './components/login/login/login.component';
 import { CrearUsuarioComponent } from './components/operaciones/crear-usuario/crear-usuario.component';
-//import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
 import { EliminarUsuarioComponent } from './components/operaciones/eliminar-usuario/eliminar-usuario.component';
 import { EditarUsuarioComponent } from './components/operaciones/editar-usuario/editar-usuario.component';
 import { RegistrarUsuarioComponent } from './components/login/registrar-usuario/registrar-usuario.component';
@@ -19,10 +17,10 @@ import { ErrorComponent } from './components/error/error.component';
 import { AvisoComponent } from './components/aviso/aviso.component';
 //Servicios
 import { UsuarioService } from './services/usuario.service';
+import { InterceptorService } from './services/interceptor.service';
 //Providers
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,8 +28,6 @@ import { InterceptorService } from './services/interceptor.service';
     //Componentes
     VentanaPrincipalComponent,
     TablaRegistrosComponent,
-    //VentanaModalComponent,
-    //ModalEliminarComponent,
     LoginComponent,
     CrearUsuarioComponent,
     EliminarUsuarioComponent,
