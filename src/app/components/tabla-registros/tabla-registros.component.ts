@@ -1,8 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { concatMap } from 'rxjs/operators';
-
 import { MatTableDataSource } from '@angular/material/table';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,10 +26,10 @@ import { RespuestaCrear } from 'src/app/interfaces/RespuestasBack';
 export class TablaRegistrosComponent implements OnInit, OnChanges {
 
   @Input() usuarios: any;
+  @Input() cargos: Cargo[];
   @Output() operacionEnTabla = new EventEmitter<boolean>();
 
   editarFila?: number;
-  cargos: Cargo[];
   usuarioEditar: Usuario;
   dataSource!: MatTableDataSource<Usuario>;
   displayedColumns: string[] = ['NOMBRE', 'APELLIDO', 'FECHA_NACIMIENTO', 'EMAIL', 'ID_CARGO', 'PASSWORD', 'ACCIONES'];
@@ -45,7 +43,7 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private _snackBar: MatSnackBar
-  ){
+  ) {
     this.cargos = [];
     this.form = this.formBuilder.group({
       NOMBRE: [''],
@@ -66,7 +64,6 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.getCargos();
   }
 
   ngOnChanges(): void {
@@ -77,13 +74,7 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     this.dataSource = new MatTableDataSource(this.usuarios);
   }
 
-  getCargos(): void {
-    this._serviceCargos.getAllCargos().subscribe((data) => {
-      this.cargos = data.data;
-    });
-  }
-
-  obtenerCargo(id:number): string {
+  obtenerCargo(id: number): string {
     return this._serviceCargos.obtenerNombreCargo(id, this.cargos);
   }
 
@@ -93,23 +84,20 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(EditarUsuarioComponent, {
       data: { usuario: this.usuarioEditar, listadoCargos: this.cargos }
     });
-    dialogRef.afterClosed().subscribe( (res) => {
-      /*this._serviceUsuarios.updateUser(res).subscribe((data) => {
-        console.log(data);
-        this.operacionEnTabla.emit(true);
-        this.openSnackBar(data.message);
-      });*/
-      this._serviceUsuarios.updateUser(res).subscribe(
-        {
-          next: (response: RespuestaCrear) => {
-            this.operacionEnTabla.emit(true);
-            this.openSnackBar(response.message);
-          },
-          error: () => {
-            this.openSnackBar('Error al editar');
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res.operar) {
+        this._serviceUsuarios.updateUser(res.usuario).subscribe(
+          {
+            next: (response: RespuestaCrear) => {
+              this.operacionEnTabla.emit(true);
+              this.openSnackBar(response.message);
+            },
+            error: () => {
+              this.openSnackBar('Error al editar');
+            }
           }
-        }
-      );
+        );
+      }
     });
   }
 
@@ -118,11 +106,7 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(EliminarUsuarioComponent, {
       data: { email: this.usuarios[index].EMAIL }
     });
-    dialogRef.afterClosed().subscribe( (res) => {
-      /*this._serviceUsuarios.deleteUser(res).subscribe((data) => {
-        this.operacionEnTabla.emit(true);
-        this.openSnackBar(data.message);
-      });*/
+    dialogRef.afterClosed().subscribe((res) => {
       this._serviceUsuarios.deleteUser(res).subscribe(
         {
           next: (response: RespuestaCrear) => {
@@ -149,25 +133,5 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
       },
       duration: 2000
     });
-  }
-
-
-
-  funcionPrueba(){
-    var data:any[];
-    this._serviceUsuarios.getUserList().pipe(
-      concatMap( (respuestaObservable1) => {
-        data = [respuestaObservable1];
-        return this._serviceCargos.getAllCargos();
-      })
-    ).subscribe(
-      (response3) => {
-        data.push(response3);
-        console.log('finalda sdasadasd', data);
-      },
-      (error) => {
-        console.error('Error al obtener los datos:', error);
-      }
-    );
   }
 }

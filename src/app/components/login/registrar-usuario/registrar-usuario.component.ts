@@ -72,13 +72,6 @@ export class RegistrarUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargos.obtenerIdCargo(this.form.value.ID_CARGO, this.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    /*this._serviceUsuarios.newUser(USER).subscribe( (res) => {
-      console.log(res)
-      if(res){
-        this.router.navigate(['/','login']);
-        this.openSnackBar();
-      }
-    });*/
     this._serviceUsuarios.newUser(USER).subscribe(
       {
         next: (response: RespuestaCrear) => {

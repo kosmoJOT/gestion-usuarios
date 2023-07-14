@@ -5,4 +5,4 @@
   <button mat-raised-button color="warn" routerLink="/login" matTooltip="Voler a Login">Salir</button>
   <button mat-raised-button color="primary" matTooltip="Crear Usuario" (click)="abrirModalCrear()">Crear</button>
 </div>
-<app-tabla-registros [usuarios]="listaUsuarios" (operacionEnTabla)="refrescarTabla($event)"></app-tabla-registros>
+<app-tabla-registros [usuarios]="listaUsuarios" [cargos]="listaCargos" (operacionEnTabla)="refrescarTabla($event)"></app-tabla-registros>

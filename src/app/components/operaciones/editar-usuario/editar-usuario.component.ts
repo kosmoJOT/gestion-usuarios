@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -30,7 +29,6 @@ export class EditarUsuarioComponent implements OnInit{
     private formBuilder: FormBuilder,
     private _serviceUsuarios: UsuarioService,
     private _serviceCargo: CargoService,
-    private router:Router,
     private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<EditarUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { usuario: Usuario, listadoCargos: Cargo[] }
@@ -74,7 +72,7 @@ export class EditarUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargo.obtenerIdCargo(this.form.value.ID_CARGO, this.data.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    this.dialogRef.close(USER);
+    this.dialogRef.close( {usuario: USER, operar: true} );
   }
 
   openSnackBar() {

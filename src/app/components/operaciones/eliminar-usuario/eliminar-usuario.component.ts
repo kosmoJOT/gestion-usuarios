@@ -16,7 +16,6 @@ export class EliminarUsuarioComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private _serviceUsuarios: UsuarioService,
     @Inject(MAT_DIALOG_DATA) public data: { email: string },
     public dialogRef: MatDialogRef<EliminarUsuarioComponent>
   ){

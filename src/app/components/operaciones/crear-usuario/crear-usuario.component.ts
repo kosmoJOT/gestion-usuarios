@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
@@ -29,9 +28,9 @@ export class CrearUsuarioComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private _serviceCargos: CargoService,
-    private router:Router,
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<CrearUsuarioComponent>
+    public dialogRef: MatDialogRef<CrearUsuarioComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { listadoCargos: Cargo[] }
     ){
     this.form = this.formBuilder.group({
       NOMBRE: ['',  Validators.required],
@@ -41,11 +40,10 @@ export class CrearUsuarioComponent implements OnInit{
       ID_CARGO: ['',  Validators.required],
       PASSWORD: ['',  Validators.required]
     });
-    this.listadoCargos=[];
+    this.listadoCargos = this.data.listadoCargos;
   }
 
   ngOnInit() {
-    this.obtenerCargos();
     this.filteredOptions = this.form.controls['ID_CARGO'].valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
@@ -72,7 +70,7 @@ export class CrearUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargos.obtenerIdCargo(this.form.value.ID_CARGO, this.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    this.dialogRef.close(USER);
+    this.dialogRef.close( {usuario: USER, operar: true} );
   }
 
   openSnackBar() {
