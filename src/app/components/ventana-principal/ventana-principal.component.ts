@@ -14,7 +14,7 @@ import { Cargo } from 'src/app/interfaces/Cargo';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 import { CrearUsuarioComponent } from '../operaciones/crear-usuario/crear-usuario.component';
-import { AvisoComponent } from '../aviso/aviso.component';
+import { AvisoComponent } from '../helpers/aviso/aviso.component';
 import { CargoService } from 'src/app/services/cargo.service';
 
 @Component({
@@ -49,7 +49,7 @@ export class VentanaPrincipalComponent implements OnInit {
     const dialog = this.dialog.open(CrearUsuarioComponent, {
       data: { listadoCargos: this.listaCargos }
     });
-    dialog.afterClosed().subscribe( (res: any) => {
+    /*dialog.afterClosed().subscribe( (res: any) => {
       if(res.operar){
         this._serviceUsuario.newUser(res.usuario).subscribe(
           {
@@ -63,7 +63,22 @@ export class VentanaPrincipalComponent implements OnInit {
           }
         );
       }
-    });
+    });*/
+    dialog.afterClosed().pipe(
+      concatMap( (res) => {
+        return this._serviceUsuario.newUser(res.usuario);
+      })
+    ).subscribe(
+      {
+        next: (response: RespuestaCrear) => {
+          this.refrescarTabla(true);
+          this.openSnackBar(response.message);
+        },
+        error: () => {
+          this.openSnackBar('Error al crear');
+        }
+      }
+    );
   }
 
   refrescarTabla(opero: any) {

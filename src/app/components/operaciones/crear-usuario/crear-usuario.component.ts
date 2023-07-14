@@ -12,7 +12,7 @@ import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
 
 import { CargoService } from 'src/app/services/cargo.service';
 
-import { AvisoComponent } from '../../aviso/aviso.component';
+import { AvisoComponent } from '../../helpers/aviso/aviso.component';
 
 @Component({
   selector: 'app-crear-usuario',

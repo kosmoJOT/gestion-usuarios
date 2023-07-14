@@ -1,6 +1,8 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { concatMap } from 'rxjs/operators';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,7 +16,7 @@ import { CargoService } from 'src/app/services/cargo.service';
 
 import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
 import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
-import { AvisoComponent } from '../aviso/aviso.component';
+import { AvisoComponent } from '../helpers/aviso/aviso.component';
 import { RespuestaCrear } from 'src/app/interfaces/RespuestasBack';
 
 
@@ -84,7 +86,7 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(EditarUsuarioComponent, {
       data: { usuario: this.usuarioEditar, listadoCargos: this.cargos }
     });
-    dialogRef.afterClosed().subscribe((res: any) => {
+    /*dialogRef.afterClosed().subscribe((res: any) => {
       if (res.operar) {
         this._serviceUsuarios.updateUser(res.usuario).subscribe(
           {
@@ -98,7 +100,22 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
           }
         );
       }
-    });
+    });*/
+    dialogRef.afterClosed().pipe(
+      concatMap( (res) => {
+        return this._serviceUsuarios.updateUser(res.usuario);
+      })
+    ).subscribe(
+      {
+        next: (response: RespuestaCrear) => {
+          this.operacionEnTabla.emit(true);
+              this.openSnackBar(response.message);
+        },
+        error: () => {
+          this.openSnackBar('Error al editar');
+        }
+      }
+    );
   }
 
   eliminarUsuario(index: number) {
@@ -106,7 +123,7 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(EliminarUsuarioComponent, {
       data: { email: this.usuarios[index].EMAIL }
     });
-    dialogRef.afterClosed().subscribe((res) => {
+    /*dialogRef.afterClosed().subscribe((res) => {
       this._serviceUsuarios.deleteUser(res).subscribe(
         {
           next: (response: RespuestaCrear) => {
@@ -118,7 +135,22 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
           }
         }
       );
-    });
+    });*/
+    dialogRef.afterClosed().pipe(
+      concatMap( (res) => {
+        return this._serviceUsuarios.deleteUser(res);
+      })
+    ).subscribe(
+      {
+        next: (response: RespuestaCrear) => {
+          this.operacionEnTabla.emit(true);
+              this.openSnackBar(response.message);
+        },
+        error: () => {
+          this.openSnackBar('Error al eliminar');
+        }
+      }
+    );
   }
 
   filtrar(event: Event) {

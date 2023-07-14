@@ -13,8 +13,8 @@ import { CrearUsuarioComponent } from './components/operaciones/crear-usuario/cr
 import { EliminarUsuarioComponent } from './components/operaciones/eliminar-usuario/eliminar-usuario.component';
 import { EditarUsuarioComponent } from './components/operaciones/editar-usuario/editar-usuario.component';
 import { RegistrarUsuarioComponent } from './components/login/registrar-usuario/registrar-usuario.component';
-import { ErrorComponent } from './components/error/error.component';
-import { AvisoComponent } from './components/aviso/aviso.component';
+import { ErrorComponent } from './components/helpers/error/error.component';
+import { AvisoComponent } from './components/helpers/aviso/aviso.component';
 //Servicios
 import { UsuarioService } from './services/usuario.service';
 import { InterceptorService } from './services/interceptor.service';

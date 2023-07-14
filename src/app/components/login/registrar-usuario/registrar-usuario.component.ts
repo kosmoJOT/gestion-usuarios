@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import { Usuario } from 'src/app/interfaces/Usuario';
@@ -14,7 +14,7 @@ import { RespuestaCrear } from 'src/app/interfaces/RespuestasBack';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { CargoService } from 'src/app/services/cargo.service';
 
-import { AvisoComponent } from '../../aviso/aviso.component';
+import { AvisoComponent } from '../../helpers/aviso/aviso.component';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -63,7 +63,7 @@ export class RegistrarUsuarioComponent implements OnInit{
     return this.listadoCargos.filter(option => option.CARGO.toLowerCase().includes(filterValue));
   }
 
-  crearUsuario(){
+  async crearUsuario(){
     const USER: Usuario = {
       NOMBRE: this.form.value.NOMBRE,
       APELLIDO: this.form.value.APELLIDO,
@@ -72,7 +72,7 @@ export class RegistrarUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargos.obtenerIdCargo(this.form.value.ID_CARGO, this.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    this._serviceUsuarios.newUser(USER).subscribe(
+    /*this._serviceUsuarios.newUser(USER).subscribe(
       {
         next: (response: RespuestaCrear) => {
           this.router.navigate(['/','login']);
@@ -82,7 +82,17 @@ export class RegistrarUsuarioComponent implements OnInit{
           this.openSnackBar('Error al iniciar sesión');
         }
       }
-    );
+    );*/
+    try {
+      const createUser$ = this._serviceUsuarios.newUser(USER);
+      const resultCreate = await lastValueFrom(createUser$);
+      if (resultCreate) {
+        this.router.navigate(['/','login']);
+        this.openSnackBar(resultCreate.message);
+      }
+    } catch (error) {
+      this.openSnackBar('Error al crear usuario');
+    }
   }
 
   openSnackBar(message: string) {

@@ -13,7 +13,7 @@ import { Cargo } from 'src/app/interfaces/Cargo';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { CargoService } from 'src/app/services/cargo.service';
 
-import { AvisoComponent } from '../../aviso/aviso.component';
+import { AvisoComponent } from '../../helpers/aviso/aviso.component';
 
 @Component({
   selector: 'app-editar-usuario',
