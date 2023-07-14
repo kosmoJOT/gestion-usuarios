@@ -1,6 +1,8 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { concatMap } from 'rxjs/operators';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,6 +17,7 @@ import { CargoService } from 'src/app/services/cargo.service';
 import { EditarUsuarioComponent } from '../operaciones/editar-usuario/editar-usuario.component';
 import { EliminarUsuarioComponent } from '../operaciones/eliminar-usuario/eliminar-usuario.component';
 import { AvisoComponent } from '../aviso/aviso.component';
+import { RespuestaCrear } from 'src/app/interfaces/RespuestasBack';
 
 
 @Component({
@@ -91,10 +94,22 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
       data: { usuario: this.usuarioEditar, listadoCargos: this.cargos }
     });
     dialogRef.afterClosed().subscribe( (res) => {
-      this._serviceUsuarios.updateUser(res).subscribe((data) => {
+      /*this._serviceUsuarios.updateUser(res).subscribe((data) => {
+        console.log(data);
         this.operacionEnTabla.emit(true);
         this.openSnackBar(data.message);
-      });
+      });*/
+      this._serviceUsuarios.updateUser(res).subscribe(
+        {
+          next: (response: RespuestaCrear) => {
+            this.operacionEnTabla.emit(true);
+            this.openSnackBar(response.message);
+          },
+          error: () => {
+            this.openSnackBar('Error al editar');
+          }
+        }
+      );
     });
   }
 
@@ -104,10 +119,21 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
       data: { email: this.usuarios[index].EMAIL }
     });
     dialogRef.afterClosed().subscribe( (res) => {
-      this._serviceUsuarios.deleteUser(res).subscribe((data) => {
+      /*this._serviceUsuarios.deleteUser(res).subscribe((data) => {
         this.operacionEnTabla.emit(true);
         this.openSnackBar(data.message);
-      });
+      });*/
+      this._serviceUsuarios.deleteUser(res).subscribe(
+        {
+          next: (response: RespuestaCrear) => {
+            this.operacionEnTabla.emit(true);
+            this.openSnackBar(response.message);
+          },
+          error: () => {
+            this.openSnackBar('Error al eliminar');
+          }
+        }
+      );
     });
   }
 
@@ -121,7 +147,27 @@ export class TablaRegistrosComponent implements OnInit, OnChanges {
       data: {
         message: message
       },
-      duration: 1000
+      duration: 2000
     });
+  }
+
+
+
+  funcionPrueba(){
+    var data:any[];
+    this._serviceUsuarios.getUserList().pipe(
+      concatMap( (respuestaObservable1) => {
+        data = [respuestaObservable1];
+        return this._serviceCargos.getAllCargos();
+      })
+    ).subscribe(
+      (response3) => {
+        data.push(response3);
+        console.log('finalda sdasadasd', data);
+      },
+      (error) => {
+        console.error('Error al obtener los datos:', error);
+      }
+    );
   }
 }

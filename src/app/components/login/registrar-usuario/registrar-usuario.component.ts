@@ -6,8 +6,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
 import { Usuario } from 'src/app/interfaces/Usuario';
 import { Cargo, ListaCargos } from 'src/app/interfaces/Cargo';
+import { RespuestaCrear } from 'src/app/interfaces/RespuestasBack';
 
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { CargoService } from 'src/app/services/cargo.service';
@@ -70,19 +72,31 @@ export class RegistrarUsuarioComponent implements OnInit{
       ID_CARGO: this._serviceCargos.obtenerIdCargo(this.form.value.ID_CARGO, this.listadoCargos),
       PASSWORD: this.form.value.PASSWORD
     };
-    this._serviceUsuarios.newUser(USER).subscribe( (res) => {
+    /*this._serviceUsuarios.newUser(USER).subscribe( (res) => {
+      console.log(res)
       if(res){
         this.router.navigate(['/','login']);
         this.openSnackBar();
       }
-    });
+    });*/
+    this._serviceUsuarios.newUser(USER).subscribe(
+      {
+        next: (response: RespuestaCrear) => {
+          this.router.navigate(['/','login']);
+          this.openSnackBar(response.message);
+        },
+        error: () => {
+          this.openSnackBar('Error al iniciar sesión');
+        }
+      }
+    );
   }
 
-  openSnackBar() {
+  openSnackBar(message: string) {
     this._snackBar.openFromComponent(AvisoComponent, {
-      duration: 1000,
+      duration: 2000,
       data: {
-        message: "Usuario Registrado"
+        message: message
       }
     });
   }

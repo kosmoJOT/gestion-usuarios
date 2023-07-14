@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 import { PeticionListaUsuarios, Usuario } from 'src/app/interfaces/Usuario';
+import { RespuestaCrear } from 'src/app/interfaces/RespuestasBack';
 
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -40,10 +41,21 @@ export class VentanaPrincipalComponent implements OnInit {
   abrirModalCrear() {
     const dialog = this.dialog.open(CrearUsuarioComponent);
     dialog.afterClosed().subscribe((res) => {
-      this._serviceUsuarios.newUser(res).subscribe((data: any) => {
+      /*this._serviceUsuarios.newUser(res).subscribe((data: any) => {
         this.refrescarTabla(true);
         this.openSnackBar(data.message);
-      });
+      });*/
+      this._serviceUsuarios.newUser(res).subscribe(
+        {
+          next: (response: RespuestaCrear) => {
+            this.refrescarTabla(true);
+            this.openSnackBar(response.message);
+          },
+          error: () => {
+            this.openSnackBar('Error al crear');
+          }
+        }
+      );
     });
   }
 
@@ -60,7 +72,7 @@ export class VentanaPrincipalComponent implements OnInit {
       data: {
         message: message
       },
-      duration: 1000
+      duration: 2000
     });
   }
 }

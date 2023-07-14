@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Usuario, EliminarUsuario, PeticionListaUsuarios } from '../interfaces/Usuario';
 import { RUTA } from '../interfaces/Ruta';
 import { LoginService } from './login.service';
+import { RespuestaCrear } from '../interfaces/RespuestasBack';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class UsuarioService {
     return this.http.get<PeticionListaUsuarios>(`${RUTA}/getUserList`, { withCredentials: true });
   }
 
-  newUser(data: Usuario): Observable<any> {
-    return this.http.post<any>(`${RUTA}/newUser`, data, { headers: {'Content-Type': 'application/json'} });
+  newUser(data: Usuario): Observable<RespuestaCrear> {
+    return this.http.post<RespuestaCrear>(`${RUTA}/newUser`, data, { headers: {'Content-Type': 'application/json'} });
   }
 
   updateUser(data: Usuario): Observable<any> {

@@ -13,7 +13,7 @@ export class LoginService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   newLogin(data: LoginUsuario): Observable<RespuestLogin> {
-    return this.http.post<RespuestLogin>(`${RUTA}/login`, data, { headers: {'Content-Type': 'application/json', credentials: "include",} });
+    return this.http.post<RespuestLogin>(`${RUTA}/login`, data, { headers: {'Content-Type': 'application/json', credentials: "include"} });
   }
 
   isLogged():boolean{
